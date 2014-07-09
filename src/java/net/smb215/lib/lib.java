@@ -121,7 +121,7 @@ public class lib {
         try {
             InitialContext ctx = new InitialContext();
             //The JDBC Data source that we just created
-            DataSource ds = (DataSource) ctx.lookup("mysql_gss_smb215Pool");
+            DataSource ds = (DataSource) ctx.lookup("jdbc/gss");
             Connection connection = ds.getConnection();
             if (connection == null) {
                 throw new SQLException("Error establishing connection!");

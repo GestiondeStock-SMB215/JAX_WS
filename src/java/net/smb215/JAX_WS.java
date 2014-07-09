@@ -27,26 +27,26 @@ public class JAX_WS {
      */
     @WebMethod(operationName = "getUserByUsername")
     public User getUserByUsername(@WebParam(name = "user_username") String user_username, @WebParam(name = "user_password") String user_password) {
-        User u = new User();
+        User user = new User();
+        
         try {
-            String query = "SELECT * FROM `user` WHERE `user_username` = '"+user_username+"' AND `user_password` = '"+user_password+"'";
+            String query = lib.ReadSelect("SelectUserByUsernameAndPassword", user_username, user_password);
             ResultSet rs = lib.exeSelect(query);
             while (rs.next()) {
-                u.setUserId(rs.getInt("user_id"));
-                u.setUserName(rs.getString("user_name"));
-                u.setUserUsername(rs.getString("user_username"));
-                u.setUserPassword(rs.getString("user_password"));
-                u.setUserEmail(rs.getString("user_email"));
-                u.setUserRoleId(rs.getInt("user_role_id"));
-                u.setUserStatus(rs.getInt("user_status"));
-                u.setUserTimeStamp(lib.strToDate(rs.getString("user_time_stamp")));
-                u.setUserLastLogin(lib.strToDate(rs.getString("user_last_login")));
+                user.setUserId(rs.getInt("user_id"));
+                user.setUserName(rs.getString("user_name"));
+                user.setUserUsername(rs.getString("user_username"));
+                //user.setUserPassword(rs.getString("user_password"));
+                user.setUserEmail(rs.getString("user_email"));
+                user.setUserRoleId(rs.getInt("user_role_id"));
+                user.setUserStatus(rs.getInt("user_status"));
+                user.setUserTimeStamp(lib.strToDate(rs.getString("user_time_stamp")));
+                user.setUserLastLogin(lib.strToDate(rs.getString("user_last_login")));
             }
-
         } catch (SQLException ex) {
             lib.logToFile("error - " + ex.toString());
         } finally {
-            return u;
+            return user;
         }
     }
 }
