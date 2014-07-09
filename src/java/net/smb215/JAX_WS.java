@@ -7,14 +7,11 @@
 package net.smb215;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import net.smb215.entities.*;
 import net.smb215.lib.lib;
-import java.util.Date;
 /**
  *
  * @author henry_kozhaya
@@ -41,12 +38,21 @@ public class JAX_WS {
                 user.setUserRoleId(rs.getInt("user_role_id"));
                 user.setUserStatus(rs.getInt("user_status"));
                 user.setUserTimeStamp(lib.strToDate(rs.getString("user_time_stamp")));
-                user.setUserLastLogin(lib.strToDate(rs.getString("user_last_login")));
+                user.setUserLastLogin(lib.strToDate(rs.getString("user_last_login")));               
             }
         } catch (SQLException ex) {
             lib.logToFile("error - " + ex.toString());
         } finally {
             return user;
         }
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getTest")
+    public String getTest(@WebParam(name = "arg1") String arg1) {
+        //TODO write your implementation code here:
+        return arg1;
     }
 }

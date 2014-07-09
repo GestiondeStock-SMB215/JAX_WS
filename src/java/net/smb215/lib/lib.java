@@ -29,7 +29,55 @@ public class lib {
     public static String SQL_Path = "c:\\javaApp\\JAX_WS\\sql\\";
     public static String App_Path = "c:\\javaApp\\JAX_WS\\";
     public static String log_file = "log.txt";
+    
+    public static void logToFile(String contents) {
+        try {
+            contents = formattedDate("yyyy-mm-dd HH:mm.ss") + " - " + contents + "\n";
+            byte[] bytes = contents.getBytes();
+            String fullPathFilename = App_Path + log_file;
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fullPathFilename, true));
+            bos.write(bytes);
+            bos.flush();
+            bos.close();
+        } catch (Exception ex) {
+        }
+    }
 
+    public static ResultSet exeSelect(String inSelect) {
+        ResultSet rs = null;
+        try {
+            InitialContext ctx = new InitialContext();
+            //The JDBC Data source that we just created
+            DataSource ds = (DataSource) ctx.lookup("jdbc/gss");
+            Connection connection = ds.getConnection();
+            if (connection == null) {
+                throw new SQLException("Error establishing connection!");
+            }
+            PreparedStatement statement = connection.prepareStatement(inSelect);
+            //To test the querry
+            //SaveTextToFile(inSelect, "Querry.txt");
+            rs = statement.executeQuery();
+            connection.close();
+            connection = null;
+        } catch (Exception ex) {
+            logToFile("error - " + ex.toString());
+        } finally {
+            return rs;
+        }
+    }
+    
+    public static String getDateTime(Date date){
+            SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd H:m:s");
+            return String.valueOf(date_format.format(date));
+    }
+    
+    public static Date strToDate(String strDate) throws ParseException{
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        Date date = format.parse(strDate);
+        return date;
+    }
+    
+    //UNUSED TILL NOW
     public static String ReadSelect(String FileName, String... Var) {
         String sContents = "";
         String SelectPath;
@@ -74,46 +122,10 @@ public class lib {
         writer.close();
     }
 
-    public static void logToFile(String contents) {
-        try {
-            contents = formattedDate("yyyy-mm-dd HH:mm.ss") + " - " + contents + "\n";
-            byte[] bytes = contents.getBytes();
-            String fullPathFilename = App_Path + log_file;
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fullPathFilename, true));
-            bos.write(bytes);
-            bos.flush();
-            bos.close();
-        } catch (Exception ex) {
-        }
-    }
-
     public static String formattedDate(String format) {
         Format formatter = new SimpleDateFormat(format);
         String s = formatter.format(new Date());
         return s;
-    }
-
-    public static ResultSet exeSelect(String inSelect) {
-        ResultSet rs = null;
-        try {
-            InitialContext ctx = new InitialContext();
-            //The JDBC Data source that we just created
-            DataSource ds = (DataSource) ctx.lookup("jdbc/gss");
-            Connection connection = ds.getConnection();
-            if (connection == null) {
-                throw new SQLException("Error establishing connection!");
-            }
-            PreparedStatement statement = connection.prepareStatement(inSelect);
-            //To test the querry
-            //SaveTextToFile(inSelect, "Querry.txt");
-            rs = statement.executeQuery();
-            connection.close();
-            connection = null;
-        } catch (Exception ex) {
-            logToFile("error - " + ex.toString());
-        } finally {
-            return rs;
-        }
     }
 
     public static int exeSQLCmd(String inSQL) {
@@ -145,10 +157,6 @@ public class lib {
             SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
             return String.valueOf(date_format.format(date));
     }
-    public static Date strToDate(String strDate) throws ParseException{
-        DateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:MM:ss");
-        Date date = format.parse(strDate);
-        return date;
-    }
+    
     
 }
