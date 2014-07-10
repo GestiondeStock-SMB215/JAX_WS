@@ -14,88 +14,89 @@ import java.util.Date;
  */
 
 public class User {
-    private Integer userId;
-    private Integer userRoleId;
-    private String userName;
-    private String userUsername;
-    private String userPassword;
-    private String userEmail;
-    private Integer userStatus;
-    private Date userLastLogin;
-    private Date userTimeStamp;
+    private Integer user_id;
+    private Integer user_role_id;
+    private String user_name;
+    private String user_username;
+    private String user_password;
+    private String user_email;
+    private Integer user_status;
+    private Date user_last_login;
+    private Date user_time_stamp;
 
     public User() {
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
-    public Integer getUserRoleId() {
-        return userRoleId;
+    public Integer getUser_role_id() {
+        return user_role_id;
     }
 
-    public void setUserRoleId(Integer userRoleId) {
-        this.userRoleId = userRoleId;
+    public void setUser_role_id(Integer user_role_id) {
+        this.user_role_id = user_role_id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
-    public String getUserUsername() {
-        return userUsername;
+    public String getUser_username() {
+        return user_username;
     }
 
-    public void setUserUsername(String userUsername) {
-        this.userUsername = userUsername;
+    public void setUser_username(String user_nsername) {
+        this.user_username = user_nsername;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getUser_password() {
+        return user_password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setUser_password(String user_password) {
+        this.user_password = user_password;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUser_email() {
+        return user_email;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
     }
 
-    public Integer getUserStatus() {
-        return userStatus;
+    public Integer getUser_status() {
+        return user_status;
     }
 
-    public void setUserStatus(Integer userStatus) {
-        this.userStatus = userStatus;
+    public void setUser_status(Integer user_status) {
+        this.user_status = user_status;
     }
 
-    public Date getUserLastLogin() {
-        return userLastLogin;
+    public Date getUser_last_login() {
+        return user_last_login;
     }
 
-    public void setUserLastLogin(Date userLastLogin) {
-        this.userLastLogin = userLastLogin;
+    public void setUser_last_login(Date user_last_login) {
+        this.user_last_login = user_last_login;
     }
 
-    public Date getUserTimeStamp() {
-        return userTimeStamp;
+    public Date getUser_time_stamp() {
+        return user_time_stamp;
     }
 
-    public void setUserTimeStamp(Date userTimeStamp) {
-        this.userTimeStamp = userTimeStamp;
+    public void setUser_time_stamp(Date user_time_stamp) {
+        this.user_time_stamp = user_time_stamp;
     }
+    
 }
