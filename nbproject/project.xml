@@ -2,9 +2,12 @@
 <project xmlns="http://www.netbeans.org/ns/project/1">
     <type>org.netbeans.modules.web.project</type>
     <configuration>
+<<<<<<< HEAD
         <buildExtensions xmlns="http://www.netbeans.org/ns/ant-build-extender/1">
             <extension file="jaxws-build.xml" id="jaxws"/>
         </buildExtensions>
+=======
+>>>>>>> origin/master
         <data xmlns="http://www.netbeans.org/ns/web-project/3">
             <name>JAX_WS</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
