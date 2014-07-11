@@ -30,14 +30,14 @@ public class JAX_WS {
             String query = lib.ReadSelect("SelectUserByUsernameAndPassword", user_username, user_password);
             ResultSet rs = lib.exeSelect(query);
             while (rs.next()) {
-                user.setUser_id(rs.getInt("user_id"));
+                user.setUser_id(rs.getString("user_id"));
                 user.setUser_name(rs.getString("user_name"));
                 user.setUser_username(rs.getString("user_username"));
                 user.setUser_email(rs.getString("user_email"));
-                user.setUser_role_id(rs.getInt("user_role_id"));
-                user.setUser_status(rs.getInt("user_status"));
-                user.setUser_time_stamp(lib.strToDate(rs.getString("user_time_stamp")));
-                user.setUser_last_login(lib.strToDate(rs.getString("user_last_login")));               
+                user.setUser_role_id(rs.getString("user_role_id"));
+                user.setUser_status(rs.getString("user_status"));
+                user.setUser_time_stamp(rs.getString("user_time_stamp"));
+                user.setUser_last_login(rs.getString("user_last_login"));               
             }
         } catch (SQLException ex) {
             lib.logToFile("error - " + ex.toString());

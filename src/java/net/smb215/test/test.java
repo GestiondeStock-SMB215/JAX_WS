@@ -52,10 +52,10 @@ public class test extends HttpServlet {
             ArrayList<QueryCriteria> Q2 = new ArrayList<QueryCriteria>();
             Q2.add(Q);
             r.Read(Q2, new ArrayList<String>());
-            out.println(r.role_id);
-            out.println(r.role_desc);
-            out.println(r.role_name);
-            out.println(r.role_time_stamp);
+            out.println(r.getRole_id());
+            out.println(r.getRole_desc());
+            out.println(r.getRole_name());
+            out.println(r.getRole_time_stamp());
             
 //            System.out.println(rs.getFetchSize());
 //            while (rs.next()) {

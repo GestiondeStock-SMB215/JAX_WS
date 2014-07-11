@@ -1,203 +1,107 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.smb215.entities;
 
-import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- *
- * @author henry_kozhaya
- */
-@Entity
-@Table(name = "branch")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Branch.findAll", query = "SELECT b FROM Branch b"),
-    @NamedQuery(name = "Branch.findByBraId", query = "SELECT b FROM Branch b WHERE b.braId = :braId"),
-    @NamedQuery(name = "Branch.findByBraName", query = "SELECT b FROM Branch b WHERE b.braName = :braName"),
-    @NamedQuery(name = "Branch.findByBraCntId", query = "SELECT b FROM Branch b WHERE b.braCntId = :braCntId"),
-    @NamedQuery(name = "Branch.findByBraCity", query = "SELECT b FROM Branch b WHERE b.braCity = :braCity"),
-    @NamedQuery(name = "Branch.findByBraAddSrt", query = "SELECT b FROM Branch b WHERE b.braAddSrt = :braAddSrt"),
-    @NamedQuery(name = "Branch.findByBraTel1", query = "SELECT b FROM Branch b WHERE b.braTel1 = :braTel1"),
-    @NamedQuery(name = "Branch.findByBraTel2", query = "SELECT b FROM Branch b WHERE b.braTel2 = :braTel2"),
-    @NamedQuery(name = "Branch.findByBraFax", query = "SELECT b FROM Branch b WHERE b.braFax = :braFax"),
-    @NamedQuery(name = "Branch.findByBraEmail", query = "SELECT b FROM Branch b WHERE b.braEmail = :braEmail"),
-    @NamedQuery(name = "Branch.findByBraTimeStamp", query = "SELECT b FROM Branch b WHERE b.braTimeStamp = :braTimeStamp")})
-public class Branch implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "bra_id")
-    private Integer braId;
-    @Size(max = 45)
-    @Column(name = "bra_name")
-    private String braName;
-    @Column(name = "bra_cnt_id")
-    private Integer braCntId;
-    @Size(max = 45)
-    @Column(name = "bra_city")
-    private String braCity;
-    @Size(max = 45)
-    @Column(name = "bra_add_srt")
-    private String braAddSrt;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "bra_add_1")
-    private String braAdd1;
-    @Size(max = 128)
-    @Column(name = "bra_tel_1")
-    private String braTel1;
-    @Size(max = 128)
-    @Column(name = "bra_tel_2")
-    private String braTel2;
-    @Size(max = 128)
-    @Column(name = "bra_fax")
-    private String braFax;
-    @Size(max = 128)
-    @Column(name = "bra_email")
-    private String braEmail;
-    @Column(name = "bra_time_stamp")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date braTimeStamp;
+public class Branch {
+    private String bra_id;
+    private String bra_name;
+    private String bra_cnt_id;
+    private String bra_city;
+    private String bra_add_srt;
+    private String bra_add_1;
+    private String bra_tel_1;
+    private String bra_tel_2;
+    private String bra_fax;
+    private String bra_email;
+    private String bra_time_stamp;
 
     public Branch() {
     }
 
-    public Branch(Integer braId) {
-        this.braId = braId;
+    public String getBra_id() {
+        return bra_id;
     }
 
-    public Integer getBraId() {
-        return braId;
+    public void setBra_id(String bra_id) {
+        this.bra_id = bra_id;
     }
 
-    public void setBraId(Integer braId) {
-        this.braId = braId;
+    public String getBra_name() {
+        return bra_name;
     }
 
-    public String getBraName() {
-        return braName;
+    public void setBra_name(String bra_name) {
+        this.bra_name = bra_name;
     }
 
-    public void setBraName(String braName) {
-        this.braName = braName;
+    public String getBra_cnt_id() {
+        return bra_cnt_id;
     }
 
-    public Integer getBraCntId() {
-        return braCntId;
+    public void setBra_cnt_id(String bra_cnt_id) {
+        this.bra_cnt_id = bra_cnt_id;
     }
 
-    public void setBraCntId(Integer braCntId) {
-        this.braCntId = braCntId;
+    public String getBra_city() {
+        return bra_city;
     }
 
-    public String getBraCity() {
-        return braCity;
+    public void setBra_city(String bra_city) {
+        this.bra_city = bra_city;
     }
 
-    public void setBraCity(String braCity) {
-        this.braCity = braCity;
+    public String getBra_add_srt() {
+        return bra_add_srt;
     }
 
-    public String getBraAddSrt() {
-        return braAddSrt;
+    public void setBra_add_srt(String bra_add_srt) {
+        this.bra_add_srt = bra_add_srt;
     }
 
-    public void setBraAddSrt(String braAddSrt) {
-        this.braAddSrt = braAddSrt;
+    public String getBra_add_1() {
+        return bra_add_1;
     }
 
-    public String getBraAdd1() {
-        return braAdd1;
+    public void setBra_add_1(String bra_add_1) {
+        this.bra_add_1 = bra_add_1;
     }
 
-    public void setBraAdd1(String braAdd1) {
-        this.braAdd1 = braAdd1;
+    public String getBra_tel_1() {
+        return bra_tel_1;
     }
 
-    public String getBraTel1() {
-        return braTel1;
+    public void setBra_tel_1(String bra_tel_1) {
+        this.bra_tel_1 = bra_tel_1;
     }
 
-    public void setBraTel1(String braTel1) {
-        this.braTel1 = braTel1;
+    public String getBra_tel_2() {
+        return bra_tel_2;
     }
 
-    public String getBraTel2() {
-        return braTel2;
+    public void setBra_tel_2(String bra_tel_2) {
+        this.bra_tel_2 = bra_tel_2;
     }
 
-    public void setBraTel2(String braTel2) {
-        this.braTel2 = braTel2;
+    public String getBra_fax() {
+        return bra_fax;
     }
 
-    public String getBraFax() {
-        return braFax;
+    public void setBra_fax(String bra_fax) {
+        this.bra_fax = bra_fax;
     }
 
-    public void setBraFax(String braFax) {
-        this.braFax = braFax;
+    public String getBra_email() {
+        return bra_email;
     }
 
-    public String getBraEmail() {
-        return braEmail;
+    public void setBra_email(String bra_email) {
+        this.bra_email = bra_email;
     }
 
-    public void setBraEmail(String braEmail) {
-        this.braEmail = braEmail;
+    public String getBra_time_stamp() {
+        return bra_time_stamp;
     }
 
-    public Date getBraTimeStamp() {
-        return braTimeStamp;
-    }
-
-    public void setBraTimeStamp(Date braTimeStamp) {
-        this.braTimeStamp = braTimeStamp;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (braId != null ? braId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Branch)) {
-            return false;
-        }
-        Branch other = (Branch) object;
-        if ((this.braId == null && other.braId != null) || (this.braId != null && !this.braId.equals(other.braId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "net.smb215.entities.Branch[ braId=" + braId + " ]";
+    public void setBra_time_stamp(String bra_time_stamp) {
+        this.bra_time_stamp = bra_time_stamp;
     }
     
 }

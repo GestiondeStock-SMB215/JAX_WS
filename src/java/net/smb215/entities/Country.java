@@ -1,176 +1,80 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.smb215.entities;
 
-import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- *
- * @author henry_kozhaya
- */
-@Entity
-@Table(name = "country")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c"),
-    @NamedQuery(name = "Country.findByCntId", query = "SELECT c FROM Country c WHERE c.cntId = :cntId"),
-    @NamedQuery(name = "Country.findByCntIso", query = "SELECT c FROM Country c WHERE c.cntIso = :cntIso"),
-    @NamedQuery(name = "Country.findByCntName", query = "SELECT c FROM Country c WHERE c.cntName = :cntName"),
-    @NamedQuery(name = "Country.findByCntNicename", query = "SELECT c FROM Country c WHERE c.cntNicename = :cntNicename"),
-    @NamedQuery(name = "Country.findByCntIso3", query = "SELECT c FROM Country c WHERE c.cntIso3 = :cntIso3"),
-    @NamedQuery(name = "Country.findByCntNumcode", query = "SELECT c FROM Country c WHERE c.cntNumcode = :cntNumcode"),
-    @NamedQuery(name = "Country.findByCntPhonecode", query = "SELECT c FROM Country c WHERE c.cntPhonecode = :cntPhonecode"),
-    @NamedQuery(name = "Country.findByCntTimeStamp", query = "SELECT c FROM Country c WHERE c.cntTimeStamp = :cntTimeStamp")})
-public class Country implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "cnt_id")
-    private Integer cntId;
-    @Size(max = 2)
-    @Column(name = "cnt_iso")
-    private String cntIso;
-    @Size(max = 80)
-    @Column(name = "cnt_name")
-    private String cntName;
-    @Size(max = 80)
-    @Column(name = "cnt_nicename")
-    private String cntNicename;
-    @Size(max = 3)
-    @Column(name = "cnt_iso3")
-    private String cntIso3;
-    @Column(name = "cnt_numcode")
-    private Short cntNumcode;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "cnt_phonecode")
-    private int cntPhonecode;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "cnt_time_stamp")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date cntTimeStamp;
+public class Country{
+    private String cnt_id;
+    private String cnt_iso;
+    private String cnt_name;
+    private String cnt_nicename;
+    private String cnt_iso3;
+    private String cnt_numcode;
+    private String cnt_phonecode;
+    private String cnt_time_stamp;
 
     public Country() {
     }
 
-    public Country(Integer cntId) {
-        this.cntId = cntId;
+    public String getCnt_id() {
+        return cnt_id;
     }
 
-    public Country(Integer cntId, int cntPhonecode, Date cntTimeStamp) {
-        this.cntId = cntId;
-        this.cntPhonecode = cntPhonecode;
-        this.cntTimeStamp = cntTimeStamp;
+    public void setCnt_id(String cnt_id) {
+        this.cnt_id = cnt_id;
     }
 
-    public Integer getCntId() {
-        return cntId;
+    public String getCnt_iso() {
+        return cnt_iso;
     }
 
-    public void setCntId(Integer cntId) {
-        this.cntId = cntId;
+    public void setCnt_iso(String cnt_iso) {
+        this.cnt_iso = cnt_iso;
     }
 
-    public String getCntIso() {
-        return cntIso;
+    public String getCnt_name() {
+        return cnt_name;
     }
 
-    public void setCntIso(String cntIso) {
-        this.cntIso = cntIso;
+    public void setCnt_name(String cnt_name) {
+        this.cnt_name = cnt_name;
     }
 
-    public String getCntName() {
-        return cntName;
+    public String getCnt_nicename() {
+        return cnt_nicename;
     }
 
-    public void setCntName(String cntName) {
-        this.cntName = cntName;
+    public void setCnt_nicename(String cnt_nicename) {
+        this.cnt_nicename = cnt_nicename;
     }
 
-    public String getCntNicename() {
-        return cntNicename;
+    public String getCnt_iso3() {
+        return cnt_iso3;
     }
 
-    public void setCntNicename(String cntNicename) {
-        this.cntNicename = cntNicename;
+    public void setCnt_iso3(String cnt_iso3) {
+        this.cnt_iso3 = cnt_iso3;
     }
 
-    public String getCntIso3() {
-        return cntIso3;
+    public String getCnt_numcode() {
+        return cnt_numcode;
     }
 
-    public void setCntIso3(String cntIso3) {
-        this.cntIso3 = cntIso3;
+    public void setCnt_numcode(String cnt_numcode) {
+        this.cnt_numcode = cnt_numcode;
     }
 
-    public Short getCntNumcode() {
-        return cntNumcode;
+    public String getCnt_phonecode() {
+        return cnt_phonecode;
     }
 
-    public void setCntNumcode(Short cntNumcode) {
-        this.cntNumcode = cntNumcode;
+    public void setCnt_phonecode(String cnt_phonecode) {
+        this.cnt_phonecode = cnt_phonecode;
     }
 
-    public int getCntPhonecode() {
-        return cntPhonecode;
+    public String getCnt_time_stamp() {
+        return cnt_time_stamp;
     }
 
-    public void setCntPhonecode(int cntPhonecode) {
-        this.cntPhonecode = cntPhonecode;
-    }
-
-    public Date getCntTimeStamp() {
-        return cntTimeStamp;
-    }
-
-    public void setCntTimeStamp(Date cntTimeStamp) {
-        this.cntTimeStamp = cntTimeStamp;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (cntId != null ? cntId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Country)) {
-            return false;
-        }
-        Country other = (Country) object;
-        if ((this.cntId == null && other.cntId != null) || (this.cntId != null && !this.cntId.equals(other.cntId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "net.smb215.entities.Country[ cntId=" + cntId + " ]";
+    public void setCnt_time_stamp(String cnt_time_stamp) {
+        this.cnt_time_stamp = cnt_time_stamp;
     }
     
 }

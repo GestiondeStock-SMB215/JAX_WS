@@ -1,257 +1,151 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.smb215.entities;
-
-import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- *
- * @author henry_kozhaya
- */
-@Entity
-@Table(name = "product")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
-    @NamedQuery(name = "Product.findByProdId", query = "SELECT p FROM Product p WHERE p.prodId = :prodId"),
-    @NamedQuery(name = "Product.findByProdCatId", query = "SELECT p FROM Product p WHERE p.prodCatId = :prodCatId"),
-    @NamedQuery(name = "Product.findByProdSku", query = "SELECT p FROM Product p WHERE p.prodSku = :prodSku"),
-    @NamedQuery(name = "Product.findByProdUpc", query = "SELECT p FROM Product p WHERE p.prodUpc = :prodUpc"),
-    @NamedQuery(name = "Product.findByProdName", query = "SELECT p FROM Product p WHERE p.prodName = :prodName"),
-    @NamedQuery(name = "Product.findByProdQty", query = "SELECT p FROM Product p WHERE p.prodQty = :prodQty"),
-    @NamedQuery(name = "Product.findByProdQtyPerUnit", query = "SELECT p FROM Product p WHERE p.prodQtyPerUnit = :prodQtyPerUnit"),
-    @NamedQuery(name = "Product.findByProdColor", query = "SELECT p FROM Product p WHERE p.prodColor = :prodColor"),
-    @NamedQuery(name = "Product.findByProdSize", query = "SELECT p FROM Product p WHERE p.prodSize = :prodSize"),
-    @NamedQuery(name = "Product.findByProdWeight", query = "SELECT p FROM Product p WHERE p.prodWeight = :prodWeight"),
-    @NamedQuery(name = "Product.findByProdSupId", query = "SELECT p FROM Product p WHERE p.prodSupId = :prodSupId"),
-    @NamedQuery(name = "Product.findByProdStatus", query = "SELECT p FROM Product p WHERE p.prodStatus = :prodStatus"),
-    @NamedQuery(name = "Product.findByProdPic", query = "SELECT p FROM Product p WHERE p.prodPic = :prodPic"),
-    @NamedQuery(name = "Product.findByProdVendId", query = "SELECT p FROM Product p WHERE p.prodVendId = :prodVendId"),
-    @NamedQuery(name = "Product.findByProdTimeStamp", query = "SELECT p FROM Product p WHERE p.prodTimeStamp = :prodTimeStamp")})
-public class Product implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "prod_id")
-    private Integer prodId;
-    @Column(name = "prod_cat_id")
-    private Integer prodCatId;
-    @Size(max = 128)
-    @Column(name = "prod_sku")
-    private String prodSku;
-    @Size(max = 128)
-    @Column(name = "prod_upc")
-    private String prodUpc;
-    @Size(max = 128)
-    @Column(name = "prod_name")
-    private String prodName;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "prod_desc")
-    private String prodDesc;
-    @Column(name = "prod_qty")
-    private Integer prodQty;
-    @Column(name = "prod_qty_per_unit")
-    private Integer prodQtyPerUnit;
-    @Column(name = "prod_color")
-    private Integer prodColor;
-    @Size(max = 45)
-    @Column(name = "prod_size")
-    private String prodSize;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "prod_weight")
-    private Double prodWeight;
-    @Column(name = "prod_sup_id")
-    private Integer prodSupId;
-    @Column(name = "prod_status")
-    private Short prodStatus;
-    @Size(max = 256)
-    @Column(name = "prod_pic")
-    private String prodPic;
-    @Column(name = "prod_vend_id")
-    private Integer prodVendId;
-    @Column(name = "prod_time_stamp")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date prodTimeStamp;
+public class Product {
+    private String prod_id;
+    private String prod_cat_id;
+    private String prod_sku;
+    private String prod_upc;
+    private String prod_name;
+    private String prod_desc;
+    private String prod_qty;
+    private String prod_qty_per_unit;
+    private String prod_color;
+    private String prod_size;
+    private String prod_weight;
+    private String prod_sup_id;
+    private String prod_status;
+    private String prod_pic;
+    private String prod_vend_id;
+    private String prod_time_stamp;
 
     public Product() {
     }
 
-    public Product(Integer prodId) {
-        this.prodId = prodId;
+    public String getProd_id() {
+        return prod_id;
     }
 
-    public Integer getProdId() {
-        return prodId;
+    public void setProd_id(String prod_id) {
+        this.prod_id = prod_id;
     }
 
-    public void setProdId(Integer prodId) {
-        this.prodId = prodId;
+    public String getProd_cat_id() {
+        return prod_cat_id;
     }
 
-    public Integer getProdCatId() {
-        return prodCatId;
+    public void setProd_cat_id(String prod_cat_id) {
+        this.prod_cat_id = prod_cat_id;
     }
 
-    public void setProdCatId(Integer prodCatId) {
-        this.prodCatId = prodCatId;
+    public String getProd_sku() {
+        return prod_sku;
     }
 
-    public String getProdSku() {
-        return prodSku;
+    public void setProd_sku(String prod_sku) {
+        this.prod_sku = prod_sku;
     }
 
-    public void setProdSku(String prodSku) {
-        this.prodSku = prodSku;
+    public String getProd_upc() {
+        return prod_upc;
     }
 
-    public String getProdUpc() {
-        return prodUpc;
+    public void setProd_upc(String prod_upc) {
+        this.prod_upc = prod_upc;
     }
 
-    public void setProdUpc(String prodUpc) {
-        this.prodUpc = prodUpc;
+    public String getProd_name() {
+        return prod_name;
     }
 
-    public String getProdName() {
-        return prodName;
+    public void setProd_name(String prod_name) {
+        this.prod_name = prod_name;
     }
 
-    public void setProdName(String prodName) {
-        this.prodName = prodName;
+    public String getProd_desc() {
+        return prod_desc;
     }
 
-    public String getProdDesc() {
-        return prodDesc;
+    public void setProd_desc(String prod_desc) {
+        this.prod_desc = prod_desc;
     }
 
-    public void setProdDesc(String prodDesc) {
-        this.prodDesc = prodDesc;
+    public String getProd_qty() {
+        return prod_qty;
     }
 
-    public Integer getProdQty() {
-        return prodQty;
+    public void setProd_qty(String prod_qty) {
+        this.prod_qty = prod_qty;
     }
 
-    public void setProdQty(Integer prodQty) {
-        this.prodQty = prodQty;
+    public String getProd_qty_per_unit() {
+        return prod_qty_per_unit;
     }
 
-    public Integer getProdQtyPerUnit() {
-        return prodQtyPerUnit;
+    public void setProd_qty_per_unit(String prod_qty_per_unit) {
+        this.prod_qty_per_unit = prod_qty_per_unit;
     }
 
-    public void setProdQtyPerUnit(Integer prodQtyPerUnit) {
-        this.prodQtyPerUnit = prodQtyPerUnit;
+    public String getProd_color() {
+        return prod_color;
     }
 
-    public Integer getProdColor() {
-        return prodColor;
+    public void setProd_color(String prod_color) {
+        this.prod_color = prod_color;
     }
 
-    public void setProdColor(Integer prodColor) {
-        this.prodColor = prodColor;
+    public String getProd_size() {
+        return prod_size;
     }
 
-    public String getProdSize() {
-        return prodSize;
+    public void setProd_size(String prod_size) {
+        this.prod_size = prod_size;
     }
 
-    public void setProdSize(String prodSize) {
-        this.prodSize = prodSize;
+    public String getProd_weight() {
+        return prod_weight;
     }
 
-    public Double getProdWeight() {
-        return prodWeight;
+    public void setProd_weight(String prod_weight) {
+        this.prod_weight = prod_weight;
     }
 
-    public void setProdWeight(Double prodWeight) {
-        this.prodWeight = prodWeight;
+    public String getProd_sup_id() {
+        return prod_sup_id;
     }
 
-    public Integer getProdSupId() {
-        return prodSupId;
+    public void setProd_sup_id(String prod_sup_id) {
+        this.prod_sup_id = prod_sup_id;
     }
 
-    public void setProdSupId(Integer prodSupId) {
-        this.prodSupId = prodSupId;
+    public String getProd_status() {
+        return prod_status;
     }
 
-    public Short getProdStatus() {
-        return prodStatus;
+    public void setProd_status(String prod_status) {
+        this.prod_status = prod_status;
     }
 
-    public void setProdStatus(Short prodStatus) {
-        this.prodStatus = prodStatus;
+    public String getProd_pic() {
+        return prod_pic;
     }
 
-    public String getProdPic() {
-        return prodPic;
+    public void setProd_pic(String prod_pic) {
+        this.prod_pic = prod_pic;
     }
 
-    public void setProdPic(String prodPic) {
-        this.prodPic = prodPic;
+    public String getProd_vend_id() {
+        return prod_vend_id;
     }
 
-    public Integer getProdVendId() {
-        return prodVendId;
+    public void setProd_vend_id(String prod_vend_id) {
+        this.prod_vend_id = prod_vend_id;
     }
 
-    public void setProdVendId(Integer prodVendId) {
-        this.prodVendId = prodVendId;
+    public String getProd_time_stamp() {
+        return prod_time_stamp;
     }
 
-    public Date getProdTimeStamp() {
-        return prodTimeStamp;
-    }
-
-    public void setProdTimeStamp(Date prodTimeStamp) {
-        this.prodTimeStamp = prodTimeStamp;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (prodId != null ? prodId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Product)) {
-            return false;
-        }
-        Product other = (Product) object;
-        if ((this.prodId == null && other.prodId != null) || (this.prodId != null && !this.prodId.equals(other.prodId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "net.smb215.entities.Product[ prodId=" + prodId + " ]";
+    public void setProd_time_stamp(String prod_time_stamp) {
+        this.prod_time_stamp = prod_time_stamp;
     }
     
 }
