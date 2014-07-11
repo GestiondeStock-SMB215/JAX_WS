@@ -7,6 +7,8 @@
 package net.smb215;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -44,14 +46,5 @@ public class JAX_WS {
         } finally {
             return user;
         }
-    }
-
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "getTest")
-    public String getTest(@WebParam(name = "arg1") String arg1) {
-        //TODO write your implementation code here:
-        return arg1;
     }
 }
