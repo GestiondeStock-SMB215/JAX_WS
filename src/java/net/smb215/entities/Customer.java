@@ -1,6 +1,15 @@
 package net.smb215.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import net.smb215.lib.CRUD;
+import net.smb215.lib.Func;
+import net.smb215.lib.QueryCriteria;
+
 public class Customer {
+    private final CRUD crud;
     private String cust_id;
     private String cust_comp;
     private String cust_name;
@@ -18,6 +27,30 @@ public class Customer {
     private String cust_time_stamp;
 
     public Customer() {
+        crud = new CRUD("customer");
+    }
+    
+    public ArrayList<Customer> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields);
+        ArrayList<Customer> result = new ArrayList<>();
+        while (rs.next()) {
+            Customer tmp = new Customer();
+            tmp = (Customer) Func.castResultSetToObject(rs, tmp);
+            result.add(tmp);
+        }
+        return result;
+    }
+    
+    public int Create(HashMap<String, String> params) {
+        return crud.Create(params);
+    }
+   
+    public int Delete(ArrayList<QueryCriteria> criteria) {
+        return crud.Delete(criteria);
+    }
+   
+    public int Update(ArrayList<QueryCriteria> criteria, HashMap<String, String> fields) {
+        return crud.Update(criteria, fields);
     }
 
     public String getCust_id() {

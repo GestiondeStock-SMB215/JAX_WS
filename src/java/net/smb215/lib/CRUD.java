@@ -64,7 +64,7 @@ public class CRUD {
                 if (!whereClause.equals("")) {
                     whereClause += " and ";
                 }
-                whereClause += "`" + criteria.get(i).field + "` " + criteria.get(i).operand.getValue() + " '" + criteria.get(i).value + "'";
+                whereClause += criteria.get(i).formatCriteria();
             }   
             for (int i = 0; i < fields.size(); i++) {
             if (!fieldsStr.equals("")) {
@@ -93,7 +93,7 @@ public class CRUD {
             if (!whereClause.equals("")) {
                 whereClause += " and ";
             }
-            whereClause += "`"+criteria.get(i).field + "` " + criteria.get(i).operand.getValue() + " '" + criteria.get(i).value + "'";
+            whereClause += criteria.get(i).formatCriteria();
         }
 
         QueryStr = "DELETE FROM " + this.table + " WHERE " + whereClause;
@@ -106,9 +106,9 @@ public class CRUD {
 
         for (int i = 0; i < criteria.size(); i++) {
             if (!whereClause.equals("")) {
-                whereClause += " and ";
+                whereClause += "and";
             }
-            whereClause += "`" + criteria.get(i).field + "` " + criteria.get(i).operand.getValue() + " '" + criteria.get(i).value + "'";
+            whereClause += criteria.get(i).formatCriteria();
         }
         Iterator<Map.Entry<String, String>> it = fields.entrySet().iterator();
         while (it.hasNext()) {

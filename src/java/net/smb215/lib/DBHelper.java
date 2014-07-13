@@ -1,6 +1,5 @@
 package net.smb215.lib;
 
-import com.sun.corba.se.impl.util.Utility;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +20,7 @@ public class DBHelper {
     public DBHelper(){
         try {
             InitialContext ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("jdbc/mysql");
+            DataSource ds = (DataSource) ctx.lookup("gss");
             this.conn = ds.getConnection();
         } catch (SQLException | NamingException ex) {
             System.out.println("ERROR!!!!!!!!!!!");
@@ -40,7 +39,6 @@ public class DBHelper {
             int rs = stmt.executeUpdate(Query);
             return rs;
         } catch (SQLException ex) {
-            ex.printStackTrace();
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
@@ -57,7 +55,6 @@ public class DBHelper {
             ResultSet rs = stmt.executeQuery(Query);
             return rs;
         } catch (SQLException ex) {
-            ex.printStackTrace();
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;

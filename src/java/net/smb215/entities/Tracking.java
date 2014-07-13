@@ -1,11 +1,45 @@
 package net.smb215.entities;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import net.smb215.lib.CRUD;
+import net.smb215.lib.Func;
+import net.smb215.lib.QueryCriteria;
+
 public class Tracking{
+    private final CRUD crud;
     private String track_id;
     private String track_trans_id;
     private String track_ship_id;
     private String track_time_stamp;
 
     public Tracking() {
+        crud = new CRUD("tracking");
+    }
+    
+    public ArrayList<Tracking> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields);
+        ArrayList<Tracking> result = new ArrayList<>();
+        while (rs.next()) {
+            Tracking tmp = new Tracking();
+            tmp = (Tracking) Func.castResultSetToObject(rs, tmp);
+            result.add(tmp);
+        }
+        return result;
+    }
+    
+    public int Create(HashMap<String, String> params) {
+        return crud.Create(params);
+    }
+   
+    public int Delete(ArrayList<QueryCriteria> criteria) {
+        return crud.Delete(criteria);
+    }
+   
+    public int Update(ArrayList<QueryCriteria> criteria, HashMap<String, String> fields) {
+        return crud.Update(criteria, fields);
     }
 
     public String getTrack_id() {

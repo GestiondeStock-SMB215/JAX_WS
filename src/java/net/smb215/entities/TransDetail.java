@@ -1,5 +1,15 @@
 package net.smb215.entities;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import net.smb215.lib.CRUD;
+import net.smb215.lib.Func;
+import net.smb215.lib.QueryCriteria;
+
 public class TransDetail{
+    private final CRUD crud;
     private String trans_det_id;
     private String trans_det_trans_id;
     private String trans_det_prod_id;
@@ -7,6 +17,30 @@ public class TransDetail{
     private String trans_det_time_stamp;
 
     public TransDetail() {
+        crud = new CRUD("trans_detail");
+    }
+    
+    public ArrayList<TransDetail> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields);
+        ArrayList<TransDetail> result = new ArrayList<>();
+        while (rs.next()) {
+            TransDetail tmp = new TransDetail();
+            tmp = (TransDetail) Func.castResultSetToObject(rs, tmp);
+            result.add(tmp);
+        }
+        return result;
+    }
+    
+    public int Create(HashMap<String, String> params) {
+        return crud.Create(params);
+    }
+   
+    public int Delete(ArrayList<QueryCriteria> criteria) {
+        return crud.Delete(criteria);
+    }
+   
+    public int Update(ArrayList<QueryCriteria> criteria, HashMap<String, String> fields) {
+        return crud.Update(criteria, fields);
     }
 
     public String getTrans_det_id() {

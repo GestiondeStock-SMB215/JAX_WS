@@ -1,5 +1,15 @@
 package net.smb215.entities;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import net.smb215.lib.CRUD;
+import net.smb215.lib.Func;
+import net.smb215.lib.QueryCriteria;
+
 public class Stock{
+    private final CRUD crud;
     private String stock_id;
     private String stock_prod_id;
     private String stock_bra_id;
@@ -7,6 +17,30 @@ public class Stock{
     private String stock_time_stamp;
 
     public Stock() {
+        crud = new CRUD("stock");
+    }
+    
+    public ArrayList<Stock> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields);
+        ArrayList<Stock> result = new ArrayList<>();
+        while (rs.next()) {
+            Stock tmp = new Stock();
+            tmp = (Stock) Func.castResultSetToObject(rs, tmp);
+            result.add(tmp);
+        }
+        return result;
+    }
+    
+    public int Create(HashMap<String, String> params) {
+        return crud.Create(params);
+    }
+   
+    public int Delete(ArrayList<QueryCriteria> criteria) {
+        return crud.Delete(criteria);
+    }
+   
+    public int Update(ArrayList<QueryCriteria> criteria, HashMap<String, String> fields) {
+        return crud.Update(criteria, fields);
     }
 
     public String getStock_id() {

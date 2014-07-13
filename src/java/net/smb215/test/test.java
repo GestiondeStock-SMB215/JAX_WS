@@ -46,16 +46,18 @@ public class test extends HttpServlet {
 //       // r.Create(values);
             
             Role r = new Role();
-            r.getClass().getFields();
-            
             QueryCriteria Q = new QueryCriteria("role_name", "test2", QueryCriteria.Operand.EQUALS);
             ArrayList<QueryCriteria> Q2 = new ArrayList<QueryCriteria>();
             Q2.add(Q);
-            r.Read(Q2, new ArrayList<String>());
-            out.println(r.getRole_id());
-            out.println(r.getRole_desc());
-            out.println(r.getRole_name());
-            out.println(r.getRole_time_stamp());
+            ArrayList<Role> result = r.Read(Q2, new ArrayList<String>());
+            
+            for(int i=0;i<result.size();i++){
+                r = result.get(i);
+                out.println(r.getRole_id());
+                out.println(r.getRole_desc());
+                out.println(r.getRole_name());
+                out.println(r.getRole_time_stamp());
+            }
             
 //            System.out.println(rs.getFetchSize());
 //            while (rs.next()) {
@@ -88,15 +90,15 @@ public class test extends HttpServlet {
         
 
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet test</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet test at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet test</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet test at " + request.getContextPath() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
         }
     }
 

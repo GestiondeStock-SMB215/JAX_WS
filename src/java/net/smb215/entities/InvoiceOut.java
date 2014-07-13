@@ -1,6 +1,15 @@
 package net.smb215.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import net.smb215.lib.CRUD;
+import net.smb215.lib.Func;
+import net.smb215.lib.QueryCriteria;
+
 public class InvoiceOut{
+    private final CRUD crud;
     private String inv_out_id;
     private String inv_out_ord_out_id;
     private String inv_out_sup_id;
@@ -15,6 +24,30 @@ public class InvoiceOut{
     private String inv_out_time_stamp;
 
     public InvoiceOut() {
+        crud = new CRUD("invoice_out");
+    }
+    
+    public int Create(HashMap<String, String> params) {
+        return crud.Create(params);
+    }
+   
+    public int Delete(ArrayList<QueryCriteria> criteria) {
+        return crud.Delete(criteria);
+    }
+   
+    public int Update(ArrayList<QueryCriteria> criteria, HashMap<String, String> fields) {
+        return crud.Update(criteria, fields);
+    }
+    
+    public ArrayList<InvoiceOut> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields);
+        ArrayList<InvoiceOut> result = new ArrayList<>();
+        while (rs.next()) {
+            InvoiceOut tmp = new InvoiceOut();
+            tmp = (InvoiceOut) Func.castResultSetToObject(rs, tmp);
+            result.add(tmp);
+        }
+        return result;
     }
 
     public String getInv_out_id() {

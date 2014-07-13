@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.smb215.lib.CRUD;
+import net.smb215.lib.Func;
 import net.smb215.lib.QueryCriteria;
 
 public class Role {
@@ -18,15 +19,15 @@ public class Role {
         crud = new CRUD("role");
     }
     
-    
-    public void Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
+    public ArrayList<Role> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
         ResultSet rs = crud.Read(criteria, fields);
+        ArrayList<Role> result = new ArrayList<>();
         while (rs.next()) {
-            this.role_id = rs.getString("role_id");
-            this.role_name = rs.getString("role_name");
-            this.role_desc = rs.getString("role_desc");
-            this.role_time_stamp = rs.getString("role_time_stamp");
-        }        
+            Role tmp = new Role();
+            tmp = (Role) Func.castResultSetToObject(rs, tmp);
+            result.add(tmp);
+        }
+        return result;
     }
    
     public int Create(HashMap<String, String> params) {

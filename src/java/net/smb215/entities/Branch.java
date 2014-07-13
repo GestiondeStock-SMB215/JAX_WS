@@ -1,6 +1,15 @@
 package net.smb215.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import net.smb215.lib.CRUD;
+import net.smb215.lib.Func;
+import net.smb215.lib.QueryCriteria;
+
 public class Branch {
+    private final CRUD crud;
     private String bra_id;
     private String bra_name;
     private String bra_cnt_id;
@@ -14,6 +23,30 @@ public class Branch {
     private String bra_time_stamp;
 
     public Branch() {
+        crud = new CRUD("branch");
+    }
+    
+    public ArrayList<Branch> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields);
+        ArrayList<Branch> result = new ArrayList<>();
+        while (rs.next()) {
+            Branch tmp = new Branch();
+            tmp = (Branch) Func.castResultSetToObject(rs, tmp);
+            result.add(tmp);
+        }
+        return result;
+    }
+    
+    public int Create(HashMap<String, String> params) {
+        return crud.Create(params);
+    }
+   
+    public int Delete(ArrayList<QueryCriteria> criteria) {
+        return crud.Delete(criteria);
+    }
+   
+    public int Update(ArrayList<QueryCriteria> criteria, HashMap<String, String> fields) {
+        return crud.Update(criteria, fields);
     }
 
     public String getBra_id() {

@@ -1,5 +1,15 @@
 package net.smb215.entities;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import net.smb215.lib.CRUD;
+import net.smb215.lib.Func;
+import net.smb215.lib.QueryCriteria;
+
 public class User {
+    private final CRUD crud;
     private String user_id;
     private String user_role_id;
     private String user_name;
@@ -11,6 +21,30 @@ public class User {
     private String user_time_stamp;
 
     public User() {
+        crud = new CRUD("user");
+    }
+    
+    public ArrayList<User> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields);
+        ArrayList<User> result = new ArrayList<>();
+        while (rs.next()) {
+            User tmp = new User();
+            tmp = (User) Func.castResultSetToObject(rs, tmp);
+            result.add(tmp);
+        }
+        return result;
+    }
+    
+    public int Create(HashMap<String, String> params) {
+        return crud.Create(params);
+    }
+   
+    public int Delete(ArrayList<QueryCriteria> criteria) {
+        return crud.Delete(criteria);
+    }
+   
+    public int Update(ArrayList<QueryCriteria> criteria, HashMap<String, String> fields) {
+        return crud.Update(criteria, fields);
     }
 
     public String getUser_id() {

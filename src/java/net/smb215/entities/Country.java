@@ -1,6 +1,15 @@
 package net.smb215.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import net.smb215.lib.CRUD;
+import net.smb215.lib.Func;
+import net.smb215.lib.QueryCriteria;
+
 public class Country{
+    private final CRUD crud;
     private String cnt_id;
     private String cnt_iso;
     private String cnt_name;
@@ -11,6 +20,30 @@ public class Country{
     private String cnt_time_stamp;
 
     public Country() {
+        crud = new CRUD("country");
+    }
+    
+    public ArrayList<Country> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields);
+        ArrayList<Country> result = new ArrayList<>();
+        while (rs.next()) {
+            Country tmp = new Country();
+            tmp = (Country) Func.castResultSetToObject(rs, tmp);
+            result.add(tmp);
+        }
+        return result;
+    }
+    
+    public int Create(HashMap<String, String> params) {
+        return crud.Create(params);
+    }
+   
+    public int Delete(ArrayList<QueryCriteria> criteria) {
+        return crud.Delete(criteria);
+    }
+   
+    public int Update(ArrayList<QueryCriteria> criteria, HashMap<String, String> fields) {
+        return crud.Update(criteria, fields);
     }
 
     public String getCnt_id() {
