@@ -94,8 +94,31 @@ public class JAX_WS {
      * Web service operation
      */
     @WebMethod(operationName = "deactivateUser")
-    public Boolean deactivateUser(@WebParam(name = "user_id") String user_id) {
-        //TODO write your implementation code here:
-        return null;
+    public int deactivateUser(@WebParam(name = "user_id") String user_id) {
+        int result = 0;
+        String query = lib.ReadSelect("DeactivateUserByUserId", user_id);
+        return lib.exeSQLCmd(query);
     }
+    
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "activateUser")
+    public int activateUser(@WebParam(name = "user_id") String user_id) {
+        int result = 0;
+        String query = lib.ReadSelect("ActivateUserByUserId", user_id);
+        return lib.exeSQLCmd(query);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "changePassword")
+    public int changePassword(@WebParam(name = "user_id") String user_id, @WebParam(name = "user_password_old") String user_password_old, @WebParam(name = "user_password_new") String user_password_new) {
+        int result = 0;
+        String query = lib.ReadSelect("ChangeUserPasswordByUserId", user_id, user_password_old, user_password_new);
+        return lib.exeSQLCmd(query);
+    }
+    
+    
 }

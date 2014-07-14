@@ -1,0 +1,1 @@
+UPDATE `user` SET `user_password` = '{3}' WHERE `user_id` = '{1}' AND `user_password` = '{2}'

@@ -1,0 +1,1 @@
+UPDATE `user` SET `user_status` = '2' WHERE `user_id` = '{1}'

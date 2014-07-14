@@ -11,9 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -119,7 +116,30 @@ public class lib {
         }
     }
     
-    
+    public static int exeSQLCmd(String inSQL) {
+        int updateCount = 0;
+        try {
+            InitialContext ctx = new InitialContext();
+            //The JDBC Data source that we just created
+            DataSource ds = (DataSource) ctx.lookup(cnx);
+            Connection connection = ds.getConnection();
+            if (connection == null) {
+                throw new SQLException("Error establishing connection!");
+            }
+
+            Statement stmt = connection.createStatement();
+            // Execute the insert statement
+            updateCount = stmt.executeUpdate(inSQL);
+            // updateCount contains the number of updated rows
+
+            connection.close();
+            connection = null;
+        } catch (Exception ex) {
+            logToFile("error - " + ex.toString());
+        } finally {
+            return updateCount;
+        }
+    }    
     
     
 //    UNUSED TILL NOW    
@@ -148,31 +168,6 @@ public class lib {
 //        return s;
 //    }
 //
-//    public static int exeSQLCmd(String inSQL) {
-//        int updateCount = 0;
-//        try {
-//            InitialContext ctx = new InitialContext();
-//            //The JDBC Data source that we just created
-//            DataSource ds = (DataSource) ctx.lookup("jdbc/gss");
-//            Connection connection = ds.getConnection();
-//            if (connection == null) {
-//                throw new SQLException("Error establishing connection!");
-//            }
-//
-//            Statement stmt = connection.createStatement();
-//            // Execute the insert statement
-//            updateCount = stmt.executeUpdate(inSQL);
-//            // updateCount contains the number of updated rows
-//
-//            connection.close();
-//            connection = null;
-//        } catch (Exception ex) {
-//            logToFile("error - " + ex.toString());
-//        } finally {
-//            return updateCount;
-//        }
-//    }
-//    
 //    public static String changeDateFormat(Date date){
 //            SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
 //            return String.valueOf(date_format.format(date));
