@@ -21,6 +21,7 @@ public class JAX_WS {
 
     /**
      * Web service operation
+     * FOR LOGIN USE
      */
     @WebMethod(operationName = "getUserByUsername")
     public User getUserByUsername(@WebParam(name = "user_username") String user_username, @WebParam(name = "user_password") String user_password) {
@@ -43,5 +44,58 @@ public class JAX_WS {
         } finally {
             return user;
         }
+    }
+
+    /**
+     * Web service operation
+     * TO CHECK USERNAME VALIDITY WHEN REGESTERING
+     */
+    @WebMethod(operationName = "checkUsernameValidity")
+    public Boolean checkUsernameValidity(@WebParam(name = "user_username") String user_username) {
+        boolean valid = false;
+        try {
+            String query = lib.ReadSelect("SelectCountUsernameByUsername", user_username);
+            ResultSet rs = lib.exeSelect(query);
+            while (rs.next()) {
+                if(rs.getInt("UsernameNum") == 0){
+                    valid = true;
+                }
+            }
+        } catch (SQLException ex) {
+            lib.logToFile("error - " + ex.toString());
+        } finally {
+            return valid;
+        }
+    }
+    
+    /**
+     * Web service operation
+     * TO CHECK EMAIL VALIDITY WHEN REGESTERING
+     */
+    @WebMethod(operationName = "checkEmailValidity")
+    public Boolean checkEmailValidity(@WebParam(name = "user_email") String user_email) {
+        boolean valid = false;
+        try {
+            String query = lib.ReadSelect("SelectCountEmailByEmail", user_email);
+            ResultSet rs = lib.exeSelect(query);
+            while (rs.next()) {
+                if(rs.getInt("EmailNum") == 0){
+                    valid = true;
+                }
+            }
+        } catch (SQLException ex) {
+            lib.logToFile("error - " + ex.toString());
+        } finally {
+            return valid;
+        }
+    }        
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "deactivateUser")
+    public Boolean deactivateUser(@WebParam(name = "user_id") String user_id) {
+        //TODO write your implementation code here:
+        return null;
     }
 }

@@ -1,0 +1,1 @@
+SELECT count(*) AS EmailNum FROM `user` WHERE `user_email` = '{1}'

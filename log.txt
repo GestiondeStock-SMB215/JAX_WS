@@ -1,1 +1,4 @@
 2014-07-14 11:44:6 - henryko - 3fb15cc626e7c67616bb59d37868bc06
+2014-07-14 14:9:56 - error - java.sql.SQLException: Column 'UsernameNum' not found.
+2014-07-14 14:10:2 - error - java.sql.SQLException: Column 'UsernameNum' not found.
+2014-07-14 14:10:11 - error - java.sql.SQLException: Column 'UsernameNum' not found.

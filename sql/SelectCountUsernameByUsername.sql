@@ -1,0 +1,1 @@
+SELECT count(*) AS UsernameNum FROM `user` WHERE `user_username` = '{1}'
