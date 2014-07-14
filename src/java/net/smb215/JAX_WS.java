@@ -7,11 +7,10 @@
 package net.smb215;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.swing.text.PasswordView;
 import net.smb215.entities.*;
 import net.smb215.lib.lib;
 /**
@@ -27,6 +26,8 @@ public class JAX_WS {
     @WebMethod(operationName = "getUserByUsername")
     public User getUserByUsername(@WebParam(name = "user_username") String user_username, @WebParam(name = "user_password") String user_password) {
         User user = new User();
+        
+        lib.logToFile(user_username+" - "+user_password);
         
         try {
             String query = lib.ReadSelect("SelectUserByUsernameAndPassword", user_username, user_password);

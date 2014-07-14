@@ -29,10 +29,11 @@ public class lib {
     public static String SQL_Path = "c:\\javaApp\\JAX_WS\\sql\\";
     public static String App_Path = "c:\\javaApp\\JAX_WS\\";
     public static String log_file = "log.txt";
+    public static String cnx = "jdbc/gss";
     
     public static void logToFile(String contents) {
         try {
-            contents = formattedDate("yyyy-mm-dd HH:mm.ss") + " - " + contents + "\n";
+            contents = getCurDateTime() + " - " + contents + "\n";
             byte[] bytes = contents.getBytes();
             String fullPathFilename = App_Path + log_file;
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fullPathFilename, true));
@@ -43,59 +44,14 @@ public class lib {
         }
     }
 
-    public static ResultSet exeSelect(String inSelect) {
-        ResultSet rs = null;
-        try {
-            InitialContext ctx = new InitialContext();
-            //The JDBC Data source that we just created
-            DataSource ds = (DataSource) ctx.lookup("jdbc/gss");
-            Connection connection = ds.getConnection();
-            if (connection == null) {
-                throw new SQLException("Error establishing connection!");
-            }
-            PreparedStatement statement = connection.prepareStatement(inSelect);
-            //To test the querry
-            //SaveTextToFile(inSelect, "Querry.txt");
-            rs = statement.executeQuery();
-            connection.close();
-            connection = null;
-        } catch (Exception ex) {
-            logToFile("error - " + ex.toString());
-        } finally {
-            return rs;
+    public static void SaveTextToFile(String contents, String FileName) throws Exception {
+        String fullPathFilename = App_Path + FileName;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fullPathFilename))) {
+            writer.write(contents);
+            writer.flush();
         }
     }
     
-    public static String getDateTime(Date date){
-            SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd H:m:s");
-            return String.valueOf(date_format.format(date));
-    }
-    
-    public static Date strToDate(String strDate) throws ParseException{
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        Date date = format.parse(strDate);
-        return date;
-    }
-    
-    //UNUSED TILL NOW
-    public static String ReadSelect(String FileName, String... Var) {
-        String sContents = "";
-        String SelectPath;
-        try {
-            SelectPath = SQL_Path + FileName + ".sql";
-            sContents = GetFileContents(SelectPath);
-            for (int i = 0; i < Var.length; i++) {
-                sContents = sContents.replace("{" + (i + 1) + "}", Var[i]);
-            }
-
-        } catch (Exception Ex) {
-            sContents = null;
-            logToFile(Ex.toString());
-        } finally {
-            return sContents;
-        }
-    }
-
     public static String GetFileContents(String pathname) throws Exception {
         File file = new File(pathname);
         StringBuilder fileContents = new StringBuilder((int) file.length());
@@ -113,50 +69,114 @@ public class lib {
             scanner.close();
         }
     }
+    
+    public static String getCurDateTime(){
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd H:m:s");
+            Date d = new Date();
+            return String.valueOf(df.format(d));
+    }      
+    
+    public static String ReadSelect(String FileName, String... Var) {
+        String sContents = "";
+        String SelectPath;
+        try {
+            SelectPath = SQL_Path + FileName + ".sql";
+            sContents = GetFileContents(SelectPath);
+            for (int i = 0; i < Var.length; i++) {
+                sContents = sContents.replace("{" + (i + 1) + "}", Var[i]);
+            }
 
-    public static void SaveTextToFile(String contents, String FileName) throws Exception {
-        String fullPathFilename = App_Path + FileName;
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fullPathFilename));
-        writer.write(contents);
-        writer.flush();
-        writer.close();
+        } catch (Exception Ex) {
+            sContents = null;
+            logToFile(Ex.toString());
+        } finally {
+            return sContents;
+        }
     }
-
-    public static String formattedDate(String format) {
-        Format formatter = new SimpleDateFormat(format);
-        String s = formatter.format(new Date());
-        return s;
-    }
-
-    public static int exeSQLCmd(String inSQL) {
-        int updateCount = 0;
+    
+    public static ResultSet exeSelect(String inSelect) {
+        ResultSet rs = null;
         try {
             InitialContext ctx = new InitialContext();
             //The JDBC Data source that we just created
-            DataSource ds = (DataSource) ctx.lookup("jdbc/gss");
+            DataSource ds = (DataSource) ctx.lookup(cnx);
             Connection connection = ds.getConnection();
             if (connection == null) {
                 throw new SQLException("Error establishing connection!");
             }
-
-            Statement stmt = connection.createStatement();
-            // Execute the insert statement
-            updateCount = stmt.executeUpdate(inSQL);
-            // updateCount contains the number of updated rows
-
+            PreparedStatement statement = connection.prepareStatement(inSelect);
+            
+            //To test the querry
+            SaveTextToFile(inSelect, "Querry.txt");
+            
+            rs = statement.executeQuery();
             connection.close();
             connection = null;
         } catch (Exception ex) {
             logToFile("error - " + ex.toString());
         } finally {
-            return updateCount;
+            return rs;
         }
     }
     
-    public static String changeDateFormat(Date date){
-            SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-            return String.valueOf(date_format.format(date));
-    }
     
     
+    
+//    UNUSED TILL NOW    
+//    public static String getDateTime(Date date){
+//            SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd H:m:s");
+//            return String.valueOf(date_format.format(date));
+//    }
+//
+//
+//    
+//    public static Date strToDate(String strDate) throws ParseException{
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+//        Date date = format.parse(strDate);
+//        return date;
+//    }
+//    
+//    //UNUSED TILL NOW
+//
+
+//
+//
+//
+//    public static String formattedDate(String format) {
+//        Format formatter = new SimpleDateFormat(format);
+//        String s = formatter.format(new Date());
+//        return s;
+//    }
+//
+//    public static int exeSQLCmd(String inSQL) {
+//        int updateCount = 0;
+//        try {
+//            InitialContext ctx = new InitialContext();
+//            //The JDBC Data source that we just created
+//            DataSource ds = (DataSource) ctx.lookup("jdbc/gss");
+//            Connection connection = ds.getConnection();
+//            if (connection == null) {
+//                throw new SQLException("Error establishing connection!");
+//            }
+//
+//            Statement stmt = connection.createStatement();
+//            // Execute the insert statement
+//            updateCount = stmt.executeUpdate(inSQL);
+//            // updateCount contains the number of updated rows
+//
+//            connection.close();
+//            connection = null;
+//        } catch (Exception ex) {
+//            logToFile("error - " + ex.toString());
+//        } finally {
+//            return updateCount;
+//        }
+//    }
+//    
+//    public static String changeDateFormat(Date date){
+//            SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
+//            return String.valueOf(date_format.format(date));
+//    }
+//    
+
 }
