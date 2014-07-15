@@ -77,7 +77,6 @@ public class JAX_WS {
     public Integer UpdateUserLastLogin(@WebParam(name = "user_id") String user_id) {
         int result = 0;
         String query = lib.ReadSelect("UpdateUserLastLogin", user_id);
-        lib.logToFile(query);
         return lib.exeSQLCmd(query);
     }
     

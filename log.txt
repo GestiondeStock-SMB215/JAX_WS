@@ -1,2 +1,0 @@
-2014-07-15 14:8:6 - UPDATE `user` SET `user_last_login` = NOW() WHERE `user_id` = '3'
-2014-07-15 14:8:12 - UPDATE `user` SET `user_last_login` = NOW() WHERE `user_id` = '2'

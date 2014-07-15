@@ -104,7 +104,7 @@ public class lib {
             PreparedStatement statement = connection.prepareStatement(inSelect);
             
             //To test the querry
-            SaveTextToFile(inSelect, "Querry.txt");
+            //SaveTextToFile(inSelect, "Querry.txt");
             
             rs = statement.executeQuery();
             connection.close();
