@@ -98,8 +98,8 @@ public class JAX_WS {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "updateLastLogin")
-    public Integer updateLastLogin(@WebParam(name = "user_id") String user_id) {
+    @WebMethod(operationName = "updateUserLastLogin")
+    public Integer updateUserLastLogin(@WebParam(name = "user_id") String user_id) {
         User user = new User();
         
         ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
@@ -110,5 +110,6 @@ public class JAX_WS {
         
         return user.Update(qc,fields);
     }
+    
 }
     
