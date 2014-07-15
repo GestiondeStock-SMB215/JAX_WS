@@ -51,7 +51,7 @@ public class JAX_WS {
      * TO CHECK USERNAME VALIDITY WHEN REGESTERING
      */
     @WebMethod(operationName = "checkUsernameValidity")
-    public Boolean checkUsernameValidity(@WebParam(name = "user_username") String user_username) {
+    public Boolean checkUserUsernameValidity(@WebParam(name = "user_username") String user_username) {
         boolean valid = false;
         try {
             String query = lib.ReadSelect("SelectCountUsernameByUsername", user_username);
@@ -68,12 +68,25 @@ public class JAX_WS {
         }
     }
     
+    
+    /**
+     * Web service operation
+     * UPDATE LAST LOGIN AFTER SUCCESSFUL LOGIN
+     */
+    @WebMethod(operationName = "UpdateUserLastLogin")
+    public Integer UpdateUserLastLogin(@WebParam(name = "user_id") String user_id) {
+        int result = 0;
+        String query = lib.ReadSelect("UpdateUserLastLogin", user_id);
+        lib.logToFile(query);
+        return lib.exeSQLCmd(query);
+    }
+    
     /**
      * Web service operation
      * TO CHECK EMAIL VALIDITY WHEN REGESTERING
      */
     @WebMethod(operationName = "checkEmailValidity")
-    public Boolean checkEmailValidity(@WebParam(name = "user_email") String user_email) {
+    public Boolean checkUserEmailValidity(@WebParam(name = "user_email") String user_email) {
         boolean valid = false;
         try {
             String query = lib.ReadSelect("SelectCountEmailByEmail", user_email);
@@ -94,9 +107,9 @@ public class JAX_WS {
      * Web service operation
      */
     @WebMethod(operationName = "deactivateUser")
-    public int deactivateUser(@WebParam(name = "user_id") String user_id) {
+    public Integer deactivateUser(@WebParam(name = "user_id") String user_id) {
         int result = 0;
-        String query = lib.ReadSelect("DeactivateUserByUserId", user_id);
+        String query = lib.ReadSelect("UpdateUserStatusSet2", user_id);
         return lib.exeSQLCmd(query);
     }
     
@@ -104,21 +117,34 @@ public class JAX_WS {
      * Web service operation
      */
     @WebMethod(operationName = "activateUser")
-    public int activateUser(@WebParam(name = "user_id") String user_id) {
+    public Integer activateUser(@WebParam(name = "user_id") String user_id) {
         int result = 0;
-        String query = lib.ReadSelect("ActivateUserByUserId", user_id);
+        String query = lib.ReadSelect("UpdateUserStatusSet1", user_id);
         return lib.exeSQLCmd(query);
     }
 
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "changePassword")
-    public int changePassword(@WebParam(name = "user_id") String user_id, @WebParam(name = "user_password_old") String user_password_old, @WebParam(name = "user_password_new") String user_password_new) {
+    @WebMethod(operationName = "changeUserPassword")
+    public Integer changeUserPassword(@WebParam(name = "user_id") String user_id, @WebParam(name = "user_password_old") String user_password_old, @WebParam(name = "user_password_new") String user_password_new) {
         int result = 0;
-        String query = lib.ReadSelect("ChangeUserPasswordByUserId", user_id, user_password_old, user_password_new);
+        String query = lib.ReadSelect("UpdateUserPassword", user_id, user_password_old, user_password_new);
         return lib.exeSQLCmd(query);
     }
-    
-    
+
+    /**
+     * Web service operation
+     * TO CREATE A NEW USER
+     */
+    @WebMethod(operationName = "addUser")
+    public Integer addUser(@WebParam(name = "user_role_id") String user_role_id, 
+            @WebParam(name = "user_name") String user_name, @WebParam(name = "user_username") String user_username, 
+            @WebParam(name = "user_password") String user_password, @WebParam(name = "user_email") String user_email, 
+            @WebParam(name = "user_status") String user_status) {
+        int result = 0;
+        String query = lib.ReadSelect("InsertUser", user_role_id, user_name, user_username, user_password, user_email, 
+                user_status);
+        return lib.exeSQLCmd(query);
+    }
 }

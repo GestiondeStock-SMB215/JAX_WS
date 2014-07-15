@@ -1,1 +1,0 @@
-SELECT * FROM `user` WHERE `user_username` = 'henryko' AND `user_password` = '3fb15cc626e7c67616bb59d37868bc06'

@@ -1,0 +1,1 @@
+UPDATE `user` SET `user_last_login` = NOW() WHERE `user_id` = '{1}'
