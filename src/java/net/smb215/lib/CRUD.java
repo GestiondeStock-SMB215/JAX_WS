@@ -71,11 +71,16 @@ public class CRUD {
                 fieldsStr += ", ";
             }
             fieldsStr += "`" + fields.get(i) + "` ";
-        }   if (fieldsStr.equals("")) {
+        }   
+        if (fieldsStr.equals("")) {
             fieldsStr = "*";
         } else {
             fieldsStr = "( " + fieldsStr + " )";
-        }   QueryStr = "SELECT "+ fieldsStr +" FROM " + this.table + " WHERE " + whereClause;
+        }   
+        if (whereClause.equals("")) {
+            whereClause = "1";
+        }   
+        QueryStr = "SELECT "+ fieldsStr +" FROM " + this.table + " WHERE " + whereClause;
         System.out.println(QueryStr);
             result = this.DBConn.executeQuery(QueryStr);
             System.out.println(result.getFetchSize());
@@ -95,7 +100,9 @@ public class CRUD {
             }
             whereClause += criteria.get(i).formatCriteria();
         }
-
+        if (whereClause.equals("")) {
+            whereClause = "1";
+        }
         QueryStr = "DELETE FROM " + this.table + " WHERE " + whereClause;
         int result = this.DBConn.executeUpdate(QueryStr);
         return result;
@@ -118,6 +125,9 @@ public class CRUD {
             Map.Entry<String, String> m = it.next();
             fieldsStr += "`" + m.getKey() + "`='" + m.getValue() + "'";
         }
+        if (whereClause.equals("")) {
+            whereClause = "1";
+        } 
         QueryStr = "Update " + this.table + " SET " + fieldsStr + " WHERE " + whereClause + ";";
         int result = this.DBConn.executeUpdate(QueryStr);
         return result;

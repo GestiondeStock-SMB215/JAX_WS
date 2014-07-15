@@ -20,7 +20,7 @@ public class DBHelper {
     public DBHelper(){
         try {
             InitialContext ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("gss");
+            DataSource ds = (DataSource) ctx.lookup(lib.cnx);
             this.conn = ds.getConnection();
         } catch (SQLException | NamingException ex) {
             System.out.println("ERROR!!!!!!!!!!!");

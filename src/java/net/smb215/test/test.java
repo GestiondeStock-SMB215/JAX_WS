@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.smb215.lib.*;
 import net.smb215.entities.*;
 import java.util.ArrayList;
+import net.smb215.JAX_WS;
 
 /**
  *
@@ -44,20 +45,22 @@ public class test extends HttpServlet {
 //        values.put("role_time_stamp", Func.NOW());
 //        out.println(values);
 //       // r.Create(values);
-            
-            Role r = new Role();
-            QueryCriteria Q = new QueryCriteria("role_name", "test2", QueryCriteria.Operand.EQUALS);
-            ArrayList<QueryCriteria> Q2 = new ArrayList<QueryCriteria>();
-            Q2.add(Q);
-            ArrayList<Role> result = r.Read(Q2, new ArrayList<String>());
-            
-            for(int i=0;i<result.size();i++){
-                r = result.get(i);
-                out.println(r.getRole_id());
-                out.println(r.getRole_desc());
-                out.println(r.getRole_name());
-                out.println(r.getRole_time_stamp());
-            }
+                JAX_WS hello = new JAX_WS();
+                User usr = hello.getUserByUsername("henryko", "3fb15cc626e7c67616bb59d37868bc06");
+                out.println("here "+usr.getUser_id());
+//            Role r = new Role();
+//            QueryCriteria Q = new QueryCriteria("role_name", "test2", QueryCriteria.Operand.EQUALS);
+//            ArrayList<QueryCriteria> Q2 = new ArrayList<QueryCriteria>();
+//            Q2.add(Q);
+//            ArrayList<Role> result = r.Read(Q2, new ArrayList<String>());
+//            
+//            for(int i=0;i<result.size();i++){
+//                r = result.get(i);
+//                out.println(r.getRole_id());
+//                out.println(r.getRole_desc());
+//                out.println(r.getRole_name());
+//                out.println(r.getRole_time_stamp());
+//            }
             
 //            System.out.println(rs.getFetchSize());
 //            while (rs.next()) {
