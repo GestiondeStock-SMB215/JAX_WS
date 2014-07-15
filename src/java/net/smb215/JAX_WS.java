@@ -8,6 +8,7 @@ package net.smb215;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
@@ -16,6 +17,7 @@ import javax.jws.WebService;
 import net.smb215.entities.*;
 import net.smb215.lib.*;
 import net.smb215.lib.QueryCriteria.*;
+import net.smb215.lib.QueryCriteria.Operand;
 /**
  *
  * @author henry_kozhaya
@@ -52,4 +54,61 @@ public class JAX_WS {
         }
         return null;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getUsers")
+    public ArrayList<User> getUsers(){
+            User user = new User();
+            ArrayList<User> users = new ArrayList<User>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            ArrayList<String> fields = new ArrayList<String>();
+        try {
+           users = user.Read(qc,fields);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(users.isEmpty()){
+                return null;
+            }
+        return users;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getRoles")
+    public ArrayList<Role> getRoles() {
+         Role role = new Role();
+            ArrayList<Role> roles = new ArrayList<Role>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            ArrayList<String> fields = new ArrayList<String>();
+        try {
+           roles = role.Read(qc,fields);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(roles.isEmpty()){
+                return null;
+            }
+        return roles;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "updateLastLogin")
+    public Integer updateLastLogin(@WebParam(name = "user_id") String user_id) {
+        User user = new User();
+        
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("user_id", user_id, Operand.EQUALS));
+        
+        HashMap<String,String> fields = new HashMap<String,String>();
+        fields.put("user_last_login", Func.NOW());
+        
+        return user.Update(qc,fields);
+    }
 }
+    
