@@ -110,6 +110,38 @@ public class JAX_WS {
         
         return user.Update(qc,fields);
     }
-    
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addUser")
+    public Integer addUser(@WebParam(name = "user_role_id") String user_role_id, @WebParam(name = "user_name") String user_name, @WebParam(name = "user_username") String user_username, @WebParam(name = "user_password") String user_password, @WebParam(name = "user_email") String user_email, @WebParam(name = "user_status") String user_status) {
+        User user = new User();        
+        
+        HashMap<String,String> fields = new HashMap<String,String>();
+        fields.put("user_role_id", user_role_id);
+        fields.put("user_name",user_username);
+        fields.put("user_username", user_name);
+        fields.put("user_password", user_password);
+        fields.put("user_email", user_email);
+        fields.put("user_status", user_status);
+        fields.put("user_time_stamp", Func.NOW());
+        fields.put("user_last_login", "0000-00-00 00:00:00");
+       
+        return user.Create(fields); 
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "deleteUser")
+    public Integer deleteUser(@WebParam(name = "user_id") String user_id) {
+        
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("user_id", user_id, Operand.EQUALS));
+        return new User().Delete(qc);
+        
+    }
+  
 }
     
