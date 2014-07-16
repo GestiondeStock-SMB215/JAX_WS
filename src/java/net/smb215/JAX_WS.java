@@ -17,7 +17,6 @@ import javax.jws.WebService;
 import net.smb215.entities.*;
 import net.smb215.lib.*;
 import net.smb215.lib.QueryCriteria.*;
-import net.smb215.lib.QueryCriteria.Operand;
 /**
  *
  * @author henry_kozhaya
@@ -142,6 +141,28 @@ public class JAX_WS {
         return new User().Delete(qc);
         
     }
-  
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "checkUserNameValidity")
+    public Boolean checkUserNameValidity(@WebParam(name = "user_username") String user_username) {
+        try {
+            User user = new User();
+            ArrayList<User> users = new ArrayList<User>();
+            
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            qc.add(new QueryCriteria("user_username", user_username, Operand.EQUALS));
+            
+            ArrayList<String> fields = new ArrayList<>();
+            
+            users = user.Read(qc, fields);
+            
+            return (users.size() == 0);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }
     
