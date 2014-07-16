@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package net.smb215;
 
 import java.sql.*;
@@ -147,6 +153,29 @@ public class JAX_WS {
             
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             qc.add(new QueryCriteria("user_username", user_username, Operand.EQUALS));
+            
+            ArrayList<String> fields = new ArrayList<>();
+            
+            users = user.Read(qc, fields);
+            
+            return (users.size() == 0);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "checkUserEmailValidity")
+    public Boolean checkUserEmailValidity(@WebParam(name = "user_email") String user_email) {
+        try {
+            User user = new User();
+            ArrayList<User> users = new ArrayList<User>();
+            
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            qc.add(new QueryCriteria("user_email", user_email, Operand.EQUALS));
             
             ArrayList<String> fields = new ArrayList<>();
             
