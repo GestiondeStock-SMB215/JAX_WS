@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.smb215;
 
 import java.sql.*;
@@ -119,8 +113,8 @@ public class JAX_WS {
         
         HashMap<String,String> fields = new HashMap<String,String>();
         fields.put("user_role_id", user_role_id);
-        fields.put("user_name",user_username);
-        fields.put("user_username", user_name);
+        fields.put("user_name",user_name);
+        fields.put("user_username", user_username);
         fields.put("user_password", user_password);
         fields.put("user_email", user_email);
         fields.put("user_status", user_status);

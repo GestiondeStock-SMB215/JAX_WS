@@ -10,17 +10,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-/**
- *
- * @author jouj
- */
 public class DBHelper {
     public Connection conn=null;
     
     public DBHelper(){
         try {
             InitialContext ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup(lib.cnx);
+            DataSource ds = (DataSource) ctx.lookup(Func.cnx);
             this.conn = ds.getConnection();
         } catch (SQLException | NamingException ex) {
             System.out.println("ERROR!!!!!!!!!!!");
