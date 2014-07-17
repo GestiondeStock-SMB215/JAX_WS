@@ -47,6 +47,11 @@ public class CRUD {
         QueryStr = "INSERT INTO `" + this.table + "` (" + fields + ") VALUES (" + values + ");";
         System.out.println(QueryStr);
         int result = this.DBConn.executeUpdate(QueryStr);
+        try {
+            this.DBConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return result;
     }
 
@@ -88,6 +93,11 @@ public class CRUD {
         } catch (SQLException ex) {
             Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            this.DBConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return result;
     }
 
@@ -105,6 +115,11 @@ public class CRUD {
         }
         QueryStr = "DELETE FROM " + this.table + " WHERE " + whereClause;
         int result = this.DBConn.executeUpdate(QueryStr);
+        try {
+            this.DBConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return result;
     }
 
@@ -130,6 +145,11 @@ public class CRUD {
         } 
         QueryStr = "Update " + this.table + " SET " + fieldsStr + " WHERE " + whereClause + ";";
         int result = this.DBConn.executeUpdate(QueryStr);
+        try {
+            this.DBConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return result;
 
     }
