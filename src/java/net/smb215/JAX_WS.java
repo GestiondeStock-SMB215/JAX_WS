@@ -73,7 +73,82 @@ public class JAX_WS {
             }
         return users;
     }
-
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getInvoiceIn")
+    public ArrayList<InvoiceIn> getInvoiceIn(){
+            InvoiceIn invoicein = new InvoiceIn();
+            ArrayList<InvoiceIn> invoicesin = new ArrayList<InvoiceIn>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            ArrayList<String> fields = new ArrayList<String>();
+        try {
+           invoicesin = invoicein.Read(qc,fields);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(invoicesin.isEmpty()){
+                return null;
+            }
+        return invoicesin;
+    }
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getInvoiceOut")
+    public ArrayList<InvoiceOut> getInvoiceOut(){
+            InvoiceOut invoiceout = new InvoiceOut();
+            ArrayList<InvoiceOut> invoicesout = new ArrayList<InvoiceOut>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            ArrayList<String> fields = new ArrayList<String>();
+        try {
+           invoicesout = invoiceout.Read(qc,fields);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(invoicesout.isEmpty()){
+                return null;
+            }
+        return invoicesout;
+    }
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getOrderIn")
+    public ArrayList<OrderIn> getOrderIn(){
+            OrderIn orderin = new OrderIn();
+            ArrayList<OrderIn> ordersin = new ArrayList<OrderIn>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            ArrayList<String> fields = new ArrayList<String>();
+        try {
+           ordersin = orderin.Read(qc,fields);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(ordersin.isEmpty()){
+                return null;
+            }
+        return ordersin;
+    }
+     /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getOrderOut")
+    public ArrayList<OrderOut> getOrderOut(){
+            OrderOut orderout = new OrderOut();
+            ArrayList<OrderOut> ordersout = new ArrayList<OrderOut>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            ArrayList<String> fields = new ArrayList<String>();
+        try {
+           ordersout = orderout.Read(qc,fields);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(ordersout.isEmpty()){
+                return null;
+            }
+        return ordersout;
+    }
     /**
      * Web service operation
      */
@@ -283,6 +358,25 @@ public class JAX_WS {
             }
         return stock;
     }
+     /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getTracking")
+    public ArrayList<Tracking> getTracking() {
+            Tracking track  = new Tracking();
+            ArrayList<Tracking> tracks = new ArrayList<Tracking>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            ArrayList<String> fields = new ArrayList<String>();
+        try {
+           tracks = track.Read(qc,fields);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(tracks.isEmpty()){
+                return null;
+            }
+        return tracks;
+    }
    
     
     /**
@@ -303,6 +397,100 @@ public class JAX_WS {
         fields.put("user_last_login", "0000-00-00 00:00:00");
        
         return user.Create(fields); 
+    }
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addInvoiceIn")
+    public Integer addInvoiceIn(@WebParam(name = "inv_in_id") String inv_in_id, @WebParam(name = "inv_in_ord_in_id") String inv_in_ord_in_id,
+                             @WebParam(name = "inv_in_cust_id") String inv_in_cust_id, @WebParam(name = "inv_in_date") String inv_in_date,
+                             @WebParam(name = "inv_in_num") String inv_in_num, @WebParam(name = "inv_in_total") String inv_in_total,
+                             @WebParam(name = "inv_in_tax") String inv_in_tax, @WebParam(name = "inv_in_disc") String inv_in_disc,
+                             @WebParam(name = "inv_in_total_due") String inv_in_total_due, @WebParam(name = "inv_in_status") String inv_in_status,
+                             @WebParam(name = "inv_in_att") String inv_in_att) {
+        InvoiceIn invoicein = new InvoiceIn();        
+        
+        HashMap<String,String> fields = new HashMap<String,String>();
+        fields.put("inv_in_id", inv_in_id);
+        fields.put("inv_in_ord_in_id",inv_in_ord_in_id);
+        fields.put("inv_in_cust_id", inv_in_cust_id);
+        fields.put("inv_in_date", inv_in_date);
+        fields.put("inv_in_num", inv_in_num);
+        fields.put("inv_in_total", inv_in_total);
+        fields.put("inv_in_tax", inv_in_tax);
+        fields.put("inv_in_disc", inv_in_disc);
+        fields.put("inv_in_total_due", inv_in_total_due);
+        fields.put("inv_in_status", inv_in_status);
+        fields.put("inv_in_att", inv_in_att);
+        fields.put("inv_in_time_stamp", Func.NOW());
+       
+        return invoicein.Create(fields); 
+    }
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addInvoiceOut")
+    public Integer addInvoiceOut(@WebParam(name = "inv_out_id") String inv_out_id, @WebParam(name = "inv_out_ord_out_id") String inv_out_ord_out_id,
+                             @WebParam(name = "inv_out_sup_id") String inv_out_sup_id, @WebParam(name = "inv_out_date") String inv_out_date,
+                             @WebParam(name = "inv_out_num") String inv_out_num, @WebParam(name = "inv_out_total") String inv_out_total,
+                             @WebParam(name = "inv_out_tax") String inv_out_tax, @WebParam(name = "inv_out_disc") String inv_out_disc,
+                             @WebParam(name = "inv_out_total_due") String inv_out_total_due, @WebParam(name = "inv_out_status") String inv_out_status,
+                             @WebParam(name = "inv_out_att") String inv_out_att) {
+        InvoiceOut invoiceout = new InvoiceOut();        
+        
+        HashMap<String,String> fields = new HashMap<String,String>();
+        fields.put("inv_out_id", inv_out_id);
+        fields.put("inv_out_ord_out_id",inv_out_ord_out_id);
+        fields.put("inv_out_sup_id", inv_out_sup_id);
+        fields.put("inv_out_date", inv_out_date);
+        fields.put("inv_out_num", inv_out_num);
+        fields.put("inv_out_total", inv_out_total);
+        fields.put("inv_out_tax", inv_out_tax);
+        fields.put("inv_out_disc", inv_out_disc);
+        fields.put("inv_out_total_due", inv_out_total_due);
+        fields.put("inv_out_status", inv_out_status);
+        fields.put("inv_out_att", inv_out_att);
+        fields.put("inv_out_time_stamp", Func.NOW());
+       
+        return invoiceout.Create(fields); 
+    }
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addOrderIn")
+    public Integer addOrderIn(@WebParam(name = "ord_in_id") String ord_in_id, @WebParam(name = "ord_in_cust_id") String ord_in_cust_id,
+                             @WebParam(name = "ord_in_date") String ord_in_date, @WebParam(name = "ord_in_del_date") String ord_in_del_date,
+                             @WebParam(name = "ord_in_status") String ord_in_status) {
+        OrderIn orderin = new OrderIn();        
+        
+        HashMap<String,String> fields = new HashMap<String,String>();
+        fields.put("ord_in_id", ord_in_id);
+        fields.put("ord_in_cust_id",ord_in_cust_id);
+        fields.put("ord_in_date", ord_in_date);
+        fields.put("ord_in_del_date", ord_in_del_date);
+        fields.put("ord_in_status", ord_in_status);
+        fields.put("ord_in_time_stamp", Func.NOW());
+       
+        return orderin.Create(fields); 
+    }
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addOrderOut")
+    public Integer addOrderOut(@WebParam(name = "ord_out_id") String ord_out_id, @WebParam(name = "ord_out_sup_id") String ord_out_sup_id,
+                             @WebParam(name = "ord_out_date") String ord_out_date, @WebParam(name = "ord_out_del_date") String ord_out_del_date,
+                             @WebParam(name = "ord_out_status") String ord_out_status) {
+        OrderOut orderout = new OrderOut();        
+        
+        HashMap<String,String> fields = new HashMap<String,String>();
+        fields.put("ord_out_id", ord_out_id);
+        fields.put("ord_out_sup_id",ord_out_sup_id);
+        fields.put("ord_out_date", ord_out_date);
+        fields.put("ord_out_del_date", ord_out_del_date);
+        fields.put("ord_out_status", ord_out_status);
+        fields.put("ord_out_time_stamp", Func.NOW());
+       
+        return orderout.Create(fields); 
     }
     /**
      * Web service operation
@@ -334,10 +522,24 @@ public class JAX_WS {
        
         return role.Create(fields); 
     }
+      /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addTracking")
+    public Integer addTracking(@WebParam(name = "track_id") String track_id, @WebParam(name = "track_trans_id") String track_trans_id, @WebParam(name = "track_ship_id") String track_ship_id) {
+        Tracking track = new Tracking();        
+        
+        HashMap<String,String> fields = new HashMap<String,String>();
+        fields.put("track_id",track_id);
+        fields.put("track_trans_id",track_trans_id);
+        fields.put("track_ship_id",track_ship_id);
+        fields.put("track_time_stamp", Func.NOW());
+       
+        return track.Create(fields); 
+    }
     /**
      * Web service operation
      */
-    
     @WebMethod(operationName = "addBranch")
     public Integer addBranch(@WebParam(name = "bra_id") String bra_id, @WebParam(name = "bra_name") String bra_name, 
                              @WebParam(name = "bra_city") String bra_city,@WebParam(name = "bra_add_srt") String bra_add_srt,
@@ -547,11 +749,75 @@ public class JAX_WS {
        
         return trans.Create(fields); 
     }
+     /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addStock")
+    public Integer addStock(@WebParam(name = "stock_id") String stock_id,
+                                @WebParam(name = "stock_prod_id") String stock_prod_id,
+                                @WebParam(name = "stock_bra_id") String stock_bra_id,
+                                @WebParam(name = "stock_qty") String stock_qty){
+        Stock stock = new Stock();        
+        
+        HashMap<String,String> fields = new HashMap<String,String>();
+        fields.put("stock_id", stock_id);
+        fields.put("stock_prod_id", stock_prod_id);
+        fields.put("stock_bra_id", stock_bra_id);
+        fields.put("stock_qty",stock_qty);
+        fields.put("stock_time_stamp", Func.NOW());
+        
+       
+        return stock.Create(fields); 
+    }
     
     
     
     
     /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "deleteInvoiceIn")
+    public Integer deleteInvoiceIn(@WebParam(name = "inv_in_id") String inv_in_id) {
+        
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("inv_in_id", inv_in_id, Operand.EQUALS));
+        return new InvoiceIn().Delete(qc);
+        
+    }  
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "deleteInvoiceOut")
+    public Integer deleteInvoiceOut(@WebParam(name = "inv_out_id") String inv_out_id) {
+        
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("inv_out_id", inv_out_id, Operand.EQUALS));
+        return new InvoiceOut().Delete(qc);
+        
+    } 
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "deleteOrderIn")
+    public Integer deleteOrderIn(@WebParam(name = "ord_in_id") String ord_in_id) {
+        
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("ord_in_id", ord_in_id, Operand.EQUALS));
+        return new OrderIn().Delete(qc);
+        
+    } 
+     /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "deleteOrderOut")
+    public Integer deleteOrderOut(@WebParam(name = "ord_out_id") String ord_out_id) {
+        
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("ord_out_id", ord_out_id, Operand.EQUALS));
+        return new OrderOut().Delete(qc);
+        
+    }   
+        /**
      * Web service operation
      */
     @WebMethod(operationName = "deleteUser")
@@ -683,6 +949,17 @@ public class JAX_WS {
         return new Tracking().Delete(qc);
         
     }
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "deleteStock")
+    public Integer deleteStock(@WebParam(name = "stock_id") String stock_id) {
+        
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("stock_id", stock_id, Operand.EQUALS));
+        return new Stock().Delete(qc);
+        
+    }
     
     
     
@@ -752,6 +1029,6 @@ public class JAX_WS {
         
         return user.Update(qc,fields);
     }
-     
-}
     
+  
+}
