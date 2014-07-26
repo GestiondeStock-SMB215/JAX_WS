@@ -19,7 +19,6 @@ public class CRUD {
     String table;
 
     public CRUD(String table) {
-        this.DBConn = new DBHelper();
         this.table = table;
     }
 
@@ -29,6 +28,7 @@ public class CRUD {
      * @return
      */
     public int Create(HashMap<String, String> params) {
+        this.DBConn = new DBHelper();
         String fields = "", values = "", QueryStr;
         Iterator<Map.Entry<String, String>> it = params.entrySet().iterator();
         while (it.hasNext()) {
@@ -62,6 +62,7 @@ public class CRUD {
      * @return
      */
     public ResultSet Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) {
+        this.DBConn = new DBHelper();
         ResultSet result = null;
         try {
             String whereClause = "", fieldsStr = "", QueryStr;
@@ -93,15 +94,11 @@ public class CRUD {
         } catch (SQLException ex) {
             Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            this.DBConn.conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return result;
     }
 
     public int Delete(ArrayList<QueryCriteria> criteria) {
+        this.DBConn = new DBHelper();
         String whereClause = "", QueryStr;
 
         for (int i = 0; i < criteria.size(); i++) {
@@ -124,6 +121,7 @@ public class CRUD {
     }
 
     public int Update(ArrayList<QueryCriteria> criteria, HashMap<String, String> fields) {
+        this.DBConn = new DBHelper();
         String whereClause = "", fieldsStr = "", QueryStr;
 
         for (int i = 0; i < criteria.size(); i++) {

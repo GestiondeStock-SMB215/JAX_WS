@@ -33,6 +33,7 @@ public class DBHelper {
         try {
             Statement stmt = this.conn.createStatement();
             int rs = stmt.executeUpdate(Query);
+            this.conn.close();
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,6 +50,7 @@ public class DBHelper {
         try {
             Statement stmt = this.conn.createStatement();
             ResultSet rs = stmt.executeQuery(Query);
+            this.conn.close();
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
