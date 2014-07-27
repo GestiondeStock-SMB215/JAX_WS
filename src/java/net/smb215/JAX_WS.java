@@ -1039,7 +1039,7 @@ public class JAX_WS {
         ArrayList<Page> pages = new ArrayList<Page>();
         ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
         
-        qc.add(new QueryCriteria("page_acl", user_role_id, Operand.EQUALS));
+        qc.add(new QueryCriteria("page_acl", user_role_id, Operand.LARGERTHANOREQUAL));
         
         ArrayList<String> fields = new ArrayList<String>();
         

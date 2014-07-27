@@ -15,6 +15,7 @@ public class Page {
     private String page_name;
     private String page_url;
     private String page_acl;
+    private String page_in_menu;
     private String page_time_stamp;
 
     public Page() {
@@ -82,6 +83,14 @@ public class Page {
 
     public void setPage_acl(String page_acl) {
         this.page_acl = page_acl;
+    }
+
+    public String getPage_in_menu() {
+        return page_in_menu;
+    }
+
+    public void setPage_in_menu(String page_in_menu) {
+        this.page_in_menu = page_in_menu;
     }
 
     public String getPage_time_stamp() {
