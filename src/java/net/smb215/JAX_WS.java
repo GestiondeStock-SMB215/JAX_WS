@@ -1029,6 +1029,48 @@ public class JAX_WS {
         
         return user.Update(qc,fields);
     }
-    
-  
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getPages")
+    public ArrayList<Page> getPages(@WebParam(name = "user_role_id") String user_role_id) {
+        Page page  = new Page();
+        ArrayList<Page> pages = new ArrayList<Page>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        
+        qc.add(new QueryCriteria("page_acl", user_role_id, Operand.EQUALS));
+        
+        ArrayList<String> fields = new ArrayList<String>();
+        
+        try {
+           pages = page.Read(qc,fields);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(pages.isEmpty()){
+                return null;
+            }
+        return pages;
+    } 
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addPage")
+    public Integer addPage(@WebParam(name = "page_parent_id") String page_parent_id, 
+            @WebParam(name = "page_name") String page_name, @WebParam(name = "page_url") String page_url, 
+            @WebParam(name = "page_acl") String page_acl) {
+        
+        Page page = new Page();
+        HashMap<String,String> fields = new HashMap<String,String>();
+        
+        fields.put("page_parent_id", page_parent_id);
+        fields.put("page_name", page_name);
+        fields.put("page_url", page_url);
+        fields.put("page_acl", page_acl);
+        fields.put("page_time_stamp", Func.NOW());
+
+        return page.Create(fields); 
+    }
 }
