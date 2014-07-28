@@ -1060,7 +1060,7 @@ public class JAX_WS {
     @WebMethod(operationName = "addPage")
     public Integer addPage(@WebParam(name = "page_parent_id") String page_parent_id, 
             @WebParam(name = "page_name") String page_name, @WebParam(name = "page_url") String page_url, 
-            @WebParam(name = "page_acl") String page_acl) {
+            @WebParam(name = "page_acl") String page_acl, @WebParam(name = "page_in_menu") String page_in_menu) {
         
         Page page = new Page();
         HashMap<String,String> fields = new HashMap<String,String>();
@@ -1069,6 +1069,7 @@ public class JAX_WS {
         fields.put("page_name", page_name);
         fields.put("page_url", page_url);
         fields.put("page_acl", page_acl);
+        fields.put("page_in_menu", page_in_menu);
         fields.put("page_time_stamp", Func.NOW());
 
         return page.Create(fields); 
