@@ -541,23 +541,24 @@ public class JAX_WS {
      * Web service operation
      */
     @WebMethod(operationName = "addBranch")
-    public Integer addBranch(@WebParam(name = "bra_id") String bra_id, @WebParam(name = "bra_name") String bra_name, 
+    public Integer addBranch(@WebParam(name = "bra_name") String bra_name, @WebParam(name = "bra_cnt_id") String bra_cnt_id, 
                              @WebParam(name = "bra_city") String bra_city,@WebParam(name = "bra_add_srt") String bra_add_srt,
-                             @WebParam(name = "bra_add_1") String bra_add_1,@WebParam(name = "bra_tel_1") String bra_tel_1, @WebParam(name = "bra_tel_2") String bra_tel_2,
+                             @WebParam(name = "bra_add_1") String bra_add_1,@WebParam(name = "bra_tel_1") String bra_tel_1, 
+                             @WebParam(name = "bra_tel_2") String bra_tel_2,
                              @WebParam(name = "bra_fax") String bra_fax, @WebParam(name = "bra_email") String bra_email) {
         Branch bra = new Branch();        
         
         HashMap<String,String> fields = new HashMap<String,String>();
-        fields.put("bra_id", bra_id);
         fields.put("bra_name",bra_name);
+        fields.put("bra_cnt_id",bra_cnt_id);
         fields.put("bra_city", bra_city);
         fields.put("bra_add_srt", bra_add_srt);
         fields.put("bra_add_1", bra_add_1);
         fields.put("bra_tel_1", bra_tel_1);
+        fields.put("bra_tel_2", bra_tel_2);
         fields.put("bra_fax", bra_fax);
         fields.put("bra_email", bra_email);
-        fields.put("bra_time_stamp", Func.NOW());
-        
+        fields.put("bra_time_stamp", Func.NOW());        
        
         return bra.Create(fields); 
     }
