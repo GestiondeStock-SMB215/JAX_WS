@@ -16,6 +16,7 @@ public class Page {
     private String page_url;
     private String page_acl;
     private String page_in_menu;
+    private String page_order;
     private String page_time_stamp;
 
     public Page() {
@@ -101,4 +102,12 @@ public class Page {
         this.page_time_stamp = page_time_stamp;
     }
 
+    public String getPage_order() {
+        return page_order;
+    }
+
+    public void setPage_order(String page_order) {
+        this.page_order = page_order;
+    }
+    
 }
