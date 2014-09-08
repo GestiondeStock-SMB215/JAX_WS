@@ -33,8 +33,8 @@ public class OrderOut {
         return crud.Update(criteria, fields);
     }
     
-    public ArrayList<OrderOut> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<OrderOut> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<OrderOut> result = new ArrayList<>();
         while (rs.next()) {
             OrderOut tmp = new OrderOut();

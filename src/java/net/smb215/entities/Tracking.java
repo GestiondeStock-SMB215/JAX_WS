@@ -19,8 +19,8 @@ public class Tracking{
         crud = new CRUD("tracking");
     }
     
-    public ArrayList<Tracking> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<Tracking> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<Tracking> result = new ArrayList<>();
         while (rs.next()) {
             Tracking tmp = new Tracking();

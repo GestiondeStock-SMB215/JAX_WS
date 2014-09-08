@@ -32,8 +32,8 @@ public class OrderInDetail {
         return crud.Update(criteria, fields);
     }
     
-    public ArrayList<OrderInDetail> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<OrderInDetail> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<OrderInDetail> result = new ArrayList<>();
         while (rs.next()) {
             OrderInDetail tmp = new OrderInDetail();

@@ -20,8 +20,8 @@ public class Category {
         crud = new CRUD("category");
     }
 
-    public ArrayList<Category> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<Category> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<Category> result = new ArrayList<>();
         while (rs.next()) {
             Category tmp = new Category();

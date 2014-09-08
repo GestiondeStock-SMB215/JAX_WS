@@ -19,8 +19,8 @@ public class Status{
         crud = new CRUD("status");
     }
     
-    public ArrayList<Status> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<Status> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<Status> result = new ArrayList<>();
         while (rs.next()) {
             Status tmp = new Status();

@@ -27,8 +27,8 @@ public class InvoiceIn {
         crud = new CRUD("invoice_in");
     }
     
-    public ArrayList<InvoiceIn> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<InvoiceIn> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<InvoiceIn> result = new ArrayList<>();
         while (rs.next()) {
             InvoiceIn tmp = new InvoiceIn();

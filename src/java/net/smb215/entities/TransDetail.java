@@ -20,8 +20,8 @@ public class TransDetail{
         crud = new CRUD("trans_detail");
     }
     
-    public ArrayList<TransDetail> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<TransDetail> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<TransDetail> result = new ArrayList<>();
         while (rs.next()) {
             TransDetail tmp = new TransDetail();

@@ -23,8 +23,8 @@ public class Country{
         crud = new CRUD("country");
     }
     
-    public ArrayList<Country> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<Country> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<Country> result = new ArrayList<>();
         while (rs.next()) {
             Country tmp = new Country();

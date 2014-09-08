@@ -41,8 +41,8 @@ public class JAX_WS {
             qc.add(new QueryCriteria("user_password", user_password, Operand.EQUALS));
             
             ArrayList<String> fields = new ArrayList<>();
-            
-            users = user.Read(qc, fields);
+            ArrayList<String> order = new ArrayList<>();
+            users = user.Read(qc, fields, order);
             if(users.isEmpty()){
                 user.setUser_id("0");
                 return user;
@@ -63,8 +63,9 @@ public class JAX_WS {
             ArrayList<User> users = new ArrayList<User>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<>();
         try {
-           users = user.Read(qc,fields);
+            users = user.Read(qc,fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,8 +83,9 @@ public class JAX_WS {
             ArrayList<InvoiceIn> invoicesin = new ArrayList<InvoiceIn>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<>();
         try {
-           invoicesin = invoicein.Read(qc,fields);
+           invoicesin = invoicein.Read(qc,fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -101,8 +103,9 @@ public class JAX_WS {
             ArrayList<InvoiceOut> invoicesout = new ArrayList<InvoiceOut>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<>();
         try {
-           invoicesout = invoiceout.Read(qc,fields);
+           invoicesout = invoiceout.Read(qc,fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,8 +123,9 @@ public class JAX_WS {
             ArrayList<OrderIn> ordersin = new ArrayList<OrderIn>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<>();
         try {
-           ordersin = orderin.Read(qc,fields);
+           ordersin = orderin.Read(qc,fields,order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -139,8 +143,9 @@ public class JAX_WS {
             ArrayList<OrderOut> ordersout = new ArrayList<OrderOut>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           ordersout = orderout.Read(qc,fields);
+           ordersout = orderout.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -158,8 +163,9 @@ public class JAX_WS {
             ArrayList<Role> roles = new ArrayList<Role>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           roles = role.Read(qc,fields);
+           roles = role.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -177,8 +183,9 @@ public class JAX_WS {
             ArrayList<Status> status = new ArrayList<Status>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           status = sta.Read(qc,fields);
+           status = sta.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -196,8 +203,9 @@ public class JAX_WS {
             ArrayList<Branch> branches = new ArrayList<Branch>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           branches = bra.Read(qc,fields);
+           branches = bra.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -215,8 +223,9 @@ public class JAX_WS {
             ArrayList<Category> categories = new ArrayList<Category>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           categories = cat.Read(qc,fields);
+           categories = cat.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -234,8 +243,9 @@ public class JAX_WS {
             ArrayList<Country> countries = new ArrayList<Country>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           countries = cnt.Read(qc,fields);
+           countries = cnt.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -253,8 +263,9 @@ public class JAX_WS {
             ArrayList<Customer> customers = new ArrayList<Customer>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           customers = cust.Read(qc,fields);
+           customers = cust.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -272,8 +283,9 @@ public class JAX_WS {
             ArrayList<Product> products = new ArrayList<Product>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           products = prod.Read(qc,fields);
+           products = prod.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -291,8 +303,9 @@ public class JAX_WS {
             ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           suppliers = sup.Read(qc,fields);
+           suppliers = sup.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -310,8 +323,9 @@ public class JAX_WS {
             ArrayList<Transfert> transfers = new ArrayList<Transfert>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           transfers = trans.Read(qc,fields);
+           transfers = trans.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -329,8 +343,9 @@ public class JAX_WS {
             ArrayList<Shipper> shippers = new ArrayList<Shipper>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           shippers = ship.Read(qc,fields);
+           shippers = ship.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -348,8 +363,9 @@ public class JAX_WS {
             ArrayList<Stock> stock = new ArrayList<Stock>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           stock = stk.Read(qc,fields);
+           stock = stk.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -367,8 +383,9 @@ public class JAX_WS {
             ArrayList<Tracking> tracks = new ArrayList<Tracking>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> order = new ArrayList<String>();
         try {
-           tracks = track.Read(qc,fields);
+           tracks = track.Read(qc, fields, order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -982,8 +999,8 @@ public class JAX_WS {
             qc.add(new QueryCriteria("user_username", user_username, Operand.EQUALS));
             
             ArrayList<String> fields = new ArrayList<>();
-            
-            users = user.Read(qc, fields);
+            ArrayList<String> order = new ArrayList<>();
+            users = user.Read(qc, fields, order);
             
             return (users.size() == 0);
         } catch (SQLException ex) {
@@ -1005,8 +1022,8 @@ public class JAX_WS {
             qc.add(new QueryCriteria("user_email", user_email, Operand.EQUALS));
             
             ArrayList<String> fields = new ArrayList<>();
-            
-            users = user.Read(qc, fields);
+            ArrayList<String> order = new ArrayList<>();
+            users = user.Read(qc, fields, order);
             
             return (users.size() == 0);
         } catch (SQLException ex) {
@@ -1043,9 +1060,11 @@ public class JAX_WS {
         qc.add(new QueryCriteria("page_acl", user_role_id, Operand.LARGERTHANOREQUAL));
         
         ArrayList<String> fields = new ArrayList<String>();
-        
+        ArrayList<String> order = new ArrayList<>();
+        order.add("`page_parent_id` ASC");
+        order.add("`page_order` ASC");
         try {
-           pages = page.Read(qc,fields);
+           pages = page.Read(qc,fields,order);
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }

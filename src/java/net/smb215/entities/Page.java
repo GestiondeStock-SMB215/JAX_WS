@@ -23,8 +23,8 @@ public class Page {
         crud = new CRUD("page");
     }
     
-    public ArrayList<Page> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<Page> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<Page> result = new ArrayList<>();
         while (rs.next()) {
             Page tmp = new Page();

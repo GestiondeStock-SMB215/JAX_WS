@@ -36,8 +36,8 @@ public class InvoiceOutDetail{
         return crud.Update(criteria, fields);
     }
     
-    public ArrayList<InvoiceOutDetail> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<InvoiceOutDetail> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<InvoiceOutDetail> result = new ArrayList<>();
         while (rs.next()) {
             InvoiceOutDetail tmp = new InvoiceOutDetail();

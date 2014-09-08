@@ -61,11 +61,11 @@ public class CRUD {
      * @param fields
      * @return
      */
-    public ResultSet Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) {
+        public ResultSet Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) {
         this.DBConn = new DBHelper();
         ResultSet result = null;
         try {
-            String whereClause = "", fieldsStr = "", QueryStr;
+            String whereClause = "", fieldsStr = "", orderStr = "", QueryStr;
             for (int i = 0; i < criteria.size(); i++) {
                 if (!whereClause.equals("")) {
                     whereClause += " and ";
@@ -73,21 +73,32 @@ public class CRUD {
                 whereClause += criteria.get(i).formatCriteria();
             }   
             for (int i = 0; i < fields.size(); i++) {
-            if (!fieldsStr.equals("")) {
-                fieldsStr += ", ";
+                if (!fieldsStr.equals("")) {
+                    fieldsStr += ", ";
+                }
+                fieldsStr += "`" + fields.get(i) + "` ";
             }
-            fieldsStr += "`" + fields.get(i) + "` ";
-        }   
-        if (fieldsStr.equals("")) {
-            fieldsStr = "*";
-        } else {
-            fieldsStr = "( " + fieldsStr + " )";
-        }   
-        if (whereClause.equals("")) {
-            whereClause = "1";
-        }   
-        QueryStr = "SELECT "+ fieldsStr +" FROM " + this.table + " WHERE " + whereClause;
-        System.out.println(QueryStr);
+            for(int i = 0; i<order.size(); i++){
+                if(orderStr != ""){
+                    orderStr += ", ";
+                }
+                orderStr += order.get(i);
+            }            
+            if (fieldsStr.equals("")) {
+                fieldsStr = "*";
+            } else {
+                fieldsStr = "( " + fieldsStr + " )";
+            }   
+            if (whereClause.equals("")) {
+                whereClause = "1";
+            }
+            if (orderStr.equals("")) {
+                orderStr = "1";
+            }
+
+            
+            QueryStr = "SELECT "+ fieldsStr +" FROM " + this.table + " WHERE " + whereClause+ " ORDER BY "+orderStr;
+            System.out.println(QueryStr);
             result = this.DBConn.executeQuery(QueryStr);
             System.out.println(result.getFetchSize());
             

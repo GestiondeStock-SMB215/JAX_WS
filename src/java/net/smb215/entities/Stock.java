@@ -20,8 +20,8 @@ public class Stock{
         crud = new CRUD("stock");
     }
     
-    public ArrayList<Stock> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<Stock> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<Stock> result = new ArrayList<>();
         while (rs.next()) {
             Stock tmp = new Stock();

@@ -31,8 +31,8 @@ public class Product {
         crud = new CRUD("product");
     }
     
-    public ArrayList<Product> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<Product> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<Product> result = new ArrayList<>();
         while (rs.next()) {
             Product tmp = new Product();

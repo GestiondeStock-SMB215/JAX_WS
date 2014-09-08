@@ -24,8 +24,8 @@ public class User {
         crud = new CRUD("user");
     }
     
-    public ArrayList<User> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<User> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<User> result = new ArrayList<>();
         while (rs.next()) {
             User tmp = new User();

@@ -30,8 +30,8 @@ public class Supplier{
         crud = new CRUD("supplier");
     }
     
-    public ArrayList<Supplier> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields) throws SQLException {
-        ResultSet rs = crud.Read(criteria, fields);
+    public ArrayList<Supplier> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+        ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<Supplier> result = new ArrayList<>();
         while (rs.next()) {
             Supplier tmp = new Supplier();
