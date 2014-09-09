@@ -561,7 +561,7 @@ public class JAX_WS {
      */
     @WebMethod(operationName = "addBranch")
     public Integer addBranch(@WebParam(name = "bra_name") String bra_name, @WebParam(name = "bra_cnt_id") String bra_cnt_id, 
-                             @WebParam(name = "bra_city") String bra_city,@WebParam(name = "bra_add_srt") String bra_add_srt,
+                             @WebParam(name = "bra_city") String bra_city,@WebParam(name = "bra_add_str") String bra_add_str,
                              @WebParam(name = "bra_add_1") String bra_add_1,@WebParam(name = "bra_tel_1") String bra_tel_1, 
                              @WebParam(name = "bra_tel_2") String bra_tel_2,
                              @WebParam(name = "bra_fax") String bra_fax, @WebParam(name = "bra_email") String bra_email) {
@@ -571,7 +571,7 @@ public class JAX_WS {
         fields.put("bra_name",bra_name);
         fields.put("bra_cnt_id",bra_cnt_id);
         fields.put("bra_city", bra_city);
-        fields.put("bra_add_srt", bra_add_srt);
+        fields.put("bra_add_str", bra_add_str);
         fields.put("bra_add_1", bra_add_1);
         fields.put("bra_tel_1", bra_tel_1);
         fields.put("bra_tel_2", bra_tel_2);
@@ -1097,4 +1097,85 @@ public class JAX_WS {
 
         return page.Create(fields); 
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getCountryNiceName")
+    public String getCountryNiceName(@WebParam(name = "cnt_id") String cnt_id) {
+        Country country = new Country();
+        ArrayList<Country> countries = new ArrayList<Country>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        
+        qc.add(new QueryCriteria("cnt_id", cnt_id, Operand.EQUALS));
+        
+        ArrayList<String> fields = new ArrayList<String>();
+        fields.add("cnt_nicename");
+        
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+                
+        try {
+           countries = country.Read(qc,fields,order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(countries.isEmpty()){
+                return null;
+            }
+        return countries.get(0).getCnt_nicename();
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getPageName")
+    public String getPageName(@WebParam(name = "page_id") String page_id) {
+        Page page = new Page();
+        ArrayList<Page> pages = new ArrayList<Page>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        
+        qc.add(new QueryCriteria("page_id", page_id, Operand.EQUALS));
+        
+        ArrayList<String> fields = new ArrayList<String>();
+        fields.add("page_name");
+        
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+                
+        try {
+           pages = page.Read(qc,fields,order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(pages.isEmpty()){
+                return null;
+            }
+        return pages.get(0).getPage_name();
+    }    
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getRoleName")
+    public String getRoleName(@WebParam(name = "role_id") String role_id) {
+        Role role = new Role();
+        ArrayList<Role> roles = new ArrayList<Role>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        
+        qc.add(new QueryCriteria("role_id", role_id, Operand.EQUALS));
+        
+        ArrayList<String> fields = new ArrayList<String>();
+        fields.add("role_name");
+        
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+                
+        try {
+           roles = role.Read(qc,fields,order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(roles.isEmpty()){
+                return null;
+            }
+        return roles.get(0).getRole_name();
+    }    
 }

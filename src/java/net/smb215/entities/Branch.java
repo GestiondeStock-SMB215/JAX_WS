@@ -15,7 +15,7 @@ public class Branch {
     private String bra_name;
     private String bra_cnt_id;
     private String bra_city;
-    private String bra_add_srt;
+    private String bra_add_str;
     private String bra_add_1;
     private String bra_tel_1;
     private String bra_tel_2;
@@ -82,12 +82,12 @@ public class Branch {
         this.bra_city = bra_city;
     }
 
-    public String getBra_add_srt() {
-        return bra_add_srt;
+    public String getBra_add_str() {
+        return bra_add_str;
     }
 
-    public void setBra_add_srt(String bra_add_srt) {
-        this.bra_add_srt = bra_add_srt;
+    public void setBra_add_str(String bra_add_srt) {
+        this.bra_add_str = bra_add_srt;
     }
 
     public String getBra_add_1() {
