@@ -7,6 +7,7 @@ import java.util.HashMap;
 import net.smb215.lib.CRUD;
 import net.smb215.lib.Func;
 import net.smb215.lib.QueryCriteria;
+import net.smb215.lib.QueryOrder;
 
 public class Page {
     private final CRUD crud;
@@ -23,7 +24,7 @@ public class Page {
         crud = new CRUD("page");
     }
     
-    public ArrayList<Page> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+    public ArrayList<Page> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<QueryOrder> order) throws SQLException {
         ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<Page> result = new ArrayList<>();
         while (rs.next()) {

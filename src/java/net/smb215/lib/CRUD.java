@@ -61,7 +61,7 @@ public class CRUD {
      * @param fields
      * @return
      */
-        public ResultSet Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) {
+        public ResultSet Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<QueryOrder> order) {
         this.DBConn = new DBHelper();
         ResultSet result = null;
         try {
@@ -82,7 +82,7 @@ public class CRUD {
                 if(orderStr != ""){
                     orderStr += ", ";
                 }
-                orderStr += order.get(i);
+                orderStr += order.get(i).formattedOrder();
             }            
             if (fieldsStr.equals("")) {
                 fieldsStr = "*";
@@ -97,7 +97,7 @@ public class CRUD {
             }
 
             
-            QueryStr = "SELECT "+ fieldsStr +" FROM " + this.table + " WHERE " + whereClause+ " ORDER BY "+orderStr;
+            QueryStr = "SELECT "+ fieldsStr +" FROM `" + this.table + "` WHERE " + whereClause+ " ORDER BY "+orderStr;
             System.out.println(QueryStr);
             result = this.DBConn.executeQuery(QueryStr);
             System.out.println(result.getFetchSize());

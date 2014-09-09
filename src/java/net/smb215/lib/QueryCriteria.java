@@ -1,9 +1,4 @@
 package net.smb215.lib;
-
-/**
- *
- * @author jouj
- */
 public class QueryCriteria {
 
     public enum Operand {

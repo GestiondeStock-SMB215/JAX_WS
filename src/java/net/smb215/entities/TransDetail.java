@@ -7,6 +7,7 @@ import java.util.HashMap;
 import net.smb215.lib.CRUD;
 import net.smb215.lib.Func;
 import net.smb215.lib.QueryCriteria;
+import net.smb215.lib.QueryOrder;
 
 public class TransDetail{
     private final CRUD crud;
@@ -20,7 +21,7 @@ public class TransDetail{
         crud = new CRUD("trans_detail");
     }
     
-    public ArrayList<TransDetail> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<String> order) throws SQLException {
+    public ArrayList<TransDetail> Read(ArrayList<QueryCriteria> criteria, ArrayList<String> fields, ArrayList<QueryOrder> order) throws SQLException {
         ResultSet rs = crud.Read(criteria, fields, order);
         ArrayList<TransDetail> result = new ArrayList<>();
         while (rs.next()) {
