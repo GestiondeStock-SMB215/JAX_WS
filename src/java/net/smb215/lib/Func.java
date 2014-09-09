@@ -31,6 +31,12 @@ public class Func {
                 String val = RS.getString(key);
                 obj.getClass().getDeclaredMethod("set"+key.substring(0, 1).toUpperCase() + key.substring(1),paramString).invoke(obj, val);
             } catch (SQLException ex) {
+                try{
+                    obj.getClass().getDeclaredMethod("set"+key.substring(0, 1).toUpperCase() + key.substring(1),paramString).invoke(obj, "");    
+                } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex1) {
+                    Logger.getLogger(Func.class.getName()).log(Level.SEVERE, null, ex1);
+                    System.out.println("Key not foud in Result Set: "+FS1.getName());
+                }
                 System.out.println("Key not foud in Result Set: "+FS1.getName());
                 Logger.getLogger(Func.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {

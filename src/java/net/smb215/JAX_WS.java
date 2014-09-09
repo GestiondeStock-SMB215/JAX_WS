@@ -1124,34 +1124,6 @@ public class JAX_WS {
             }
         return countries.get(0).getCnt_nicename();
     }
-
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "getPageName")
-    public String getPageName(@WebParam(name = "page_id") String page_id) {
-        Page page = new Page();
-        ArrayList<Page> pages = new ArrayList<Page>();
-        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
-        
-        qc.add(new QueryCriteria("page_id", page_id, Operand.EQUALS));
-        
-        ArrayList<String> fields = new ArrayList<String>();
-        fields.add("page_name");
-        
-        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
-                
-        try {
-           pages = page.Read(qc,fields,order);
-        } catch (SQLException ex) {
-            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            if(pages.isEmpty()){
-                return null;
-            }
-        return pages.get(0).getPage_name();
-    }    
-
     /**
      * Web service operation
      */
