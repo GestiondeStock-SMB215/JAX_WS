@@ -1565,7 +1565,7 @@ public class JAX_WS {
      /**
      * Web service operation
      */
-    @WebMethod(operationName = "deleteOrderInDetail")
+    @WebMethod(operationName = "deleteInvoiceInDetail")
     public Integer deleteInvoiceInDetail(@WebParam(name = "inv_in_det_id") String inv_in_det_id) {
         
         ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
@@ -1895,4 +1895,5 @@ public class JAX_WS {
             }
         return countries.get(0).getCnt_nicename();
     }
+
 }
