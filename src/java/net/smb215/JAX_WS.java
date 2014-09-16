@@ -59,7 +59,6 @@ public class JAX_WS {
             return bra.Create(fields);
         }
         else{
-            fields.put("bra_id",bra_id);
             fields.put("bra_name",bra_name);
             fields.put("bra_cnt_id",bra_cnt_id);
             fields.put("bra_city", bra_city);
@@ -991,7 +990,6 @@ public class JAX_WS {
             @WebParam(name = "user_username") String user_username, 
             @WebParam(name = "user_password") String user_password, 
             @WebParam(name = "user_email") String user_email, 
-            @WebParam(name = "user_last_login") String user_last_login, 
             @WebParam(name = "user_status") String user_status
     ){
         User user = new User();
@@ -1003,7 +1001,7 @@ public class JAX_WS {
             fields.put("user_username", user_username);
             fields.put("user_password", user_password);
             fields.put("user_email", user_email);
-            fields.put("user_last_login", user_last_login);
+            fields.put("user_last_login",  Func.NOW());
             fields.put("user_status", user_status);
             fields.put("user_time_stamp", Func.NOW());
             return user.Create(fields);
@@ -1012,9 +1010,10 @@ public class JAX_WS {
             fields.put("user_role_id", user_role_id);
             fields.put("user_name",user_name);
             fields.put("user_username", user_username);
-            fields.put("user_password", user_password);
+            if(!user_password.equals("6bb61e3b7bce0931da574d19d1d82c88")){
+                fields.put("user_password", user_password);
+            }
             fields.put("user_email", user_email);
-            fields.put("user_last_login", user_last_login);
             fields.put("user_status", user_status);
             
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
