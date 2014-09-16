@@ -242,6 +242,11 @@ public class JAX_WS {
             fields.put("cust_add_1", cust_add_1);
             fields.put("cust_add_2", cust_add_2);
             fields.put("cust_fax", cust_fax);
+            fields.put("cust_city", cust_city);
+            fields.put("cust_cnt_id", cust_cnt_id);
+            fields.put("cust_tel_1", cust_tel_1);
+            fields.put("cust_tel_2", cust_tel_2);
+            fields.put("cust_fax", cust_fax);
             fields.put("cust_email", cust_email);
             fields.put("cust_site", cust_site);
             fields.put("cust_logo", cust_logo);
@@ -254,6 +259,11 @@ public class JAX_WS {
             fields.put("cust_title",cust_title);
             fields.put("cust_add_1", cust_add_1);
             fields.put("cust_add_2", cust_add_2);
+            fields.put("cust_fax", cust_fax);
+            fields.put("cust_city", cust_city);
+            fields.put("cust_cnt_id", cust_cnt_id);
+            fields.put("cust_tel_1", cust_tel_1);
+            fields.put("cust_tel_2", cust_tel_2);
             fields.put("cust_fax", cust_fax);
             fields.put("cust_email", cust_email);
             fields.put("cust_site", cust_site);
@@ -1895,5 +1905,31 @@ public class JAX_WS {
             }
         return countries.get(0).getCnt_nicename();
     }
-
+    
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getPages")
+    public ArrayList<Page> getPages(@WebParam(name = "user_role_id") String user_role_id) {
+        Page page  = new Page();
+        ArrayList<Page> pages = new ArrayList<Page>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        
+        qc.add(new QueryCriteria("page_acl", user_role_id, Operand.LARGERTHANOREQUAL));
+        
+        ArrayList<String> fields = new ArrayList<String>();
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        order.add(new QueryOrder("page_parent_id", Order.A));
+        order.add(new QueryOrder("page_order", Order.A));
+        
+        try {
+           pages = page.Read(qc,fields,order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(pages.isEmpty()){
+                return null;
+            }
+        return pages;
+    }
 }
