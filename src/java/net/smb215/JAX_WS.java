@@ -1928,4 +1928,13 @@ public class JAX_WS {
             }
         return pages;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "trasProd")
+    public Integer trasProd(@WebParam(name = "prod_id") String prod_id, @WebParam(name = "s_bra_id") String s_bra_id, @WebParam(name = "d_bra_id") String d_bra_id, @WebParam(name = "prod_qty") String prod_qty) {
+        //TODO write your implementation code here:
+        return null;
+    }
 }
