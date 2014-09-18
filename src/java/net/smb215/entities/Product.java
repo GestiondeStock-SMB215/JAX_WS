@@ -18,7 +18,6 @@ public class Product {
     private String prod_name;
     private String prod_desc;
     private String prod_qty;
-    private String prod_qty_per_unit;
     private String prod_color;
     private String prod_size;
     private String prod_weight;
@@ -109,14 +108,6 @@ public class Product {
 
     public void setProd_qty(String prod_qty) {
         this.prod_qty = prod_qty;
-    }
-
-    public String getProd_qty_per_unit() {
-        return prod_qty_per_unit;
-    }
-
-    public void setProd_qty_per_unit(String prod_qty_per_unit) {
-        this.prod_qty_per_unit = prod_qty_per_unit;
     }
 
     public String getProd_color() {

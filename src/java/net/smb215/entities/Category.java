@@ -14,7 +14,6 @@ public class Category {
     private String cat_id;
     private String cat_name;
     private String cat_desc;
-    private String cat_pic;
     private String cat_time_stamp;
 
     public Category() {
@@ -66,14 +65,6 @@ public class Category {
 
     public void setCat_desc(String cat_desc) {
         this.cat_desc = cat_desc;
-    }
-
-    public String getCat_pic() {
-        return cat_pic;
-    }
-
-    public void setCat_pic(String cat_pic) {
-        this.cat_pic = cat_pic;
     }
 
     public String getCat_time_stamp() {

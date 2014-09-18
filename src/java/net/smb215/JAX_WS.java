@@ -408,7 +408,6 @@ public class JAX_WS {
             @WebParam(name = "prod_name") String prod_name,
             @WebParam(name = "prod_desc") String prod_desc,
             @WebParam(name = "prod_qty") String prod_qty,
-            @WebParam(name = "prod_qty_per_unit") String prod_qty_per_unit,
             @WebParam(name = "prod_color") String prod_color,
             @WebParam(name = "prod_size") String prod_size,
             @WebParam(name = "prod_weight") String prod_weight,
@@ -427,7 +426,6 @@ public class JAX_WS {
             fields.put("prod_name", prod_name);
             fields.put("prod_desc", prod_desc);
             fields.put("prod_qty", prod_qty);
-            fields.put("prod_qty_per_unit", prod_qty_per_unit);
             fields.put("prod_color", prod_color);
             fields.put("prod_size", prod_size);
             fields.put("prod_weight", prod_weight);
@@ -446,7 +444,6 @@ public class JAX_WS {
             fields.put("prod_name", prod_name);
             fields.put("prod_desc", prod_desc);
             fields.put("prod_qty", prod_qty);
-            fields.put("prod_qty_per_unit", prod_qty_per_unit);
             fields.put("prod_color", prod_color);
             fields.put("prod_size", prod_size);
             fields.put("prod_weight", prod_weight);
