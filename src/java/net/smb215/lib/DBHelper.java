@@ -32,9 +32,14 @@ public class DBHelper {
     public int executeUpdate(String Query){
         try {
             Statement stmt = this.conn.createStatement();
-            int rs = stmt.executeUpdate(Query);
+            int rs = stmt.executeUpdate(Query,Statement.RETURN_GENERATED_KEYS);
             this.conn.close();
-            return rs;
+            ResultSet rss = stmt.getGeneratedKeys();
+            int key=-1;
+            if (rss != null && rss.next()) {
+                 key = rss.getInt(1);
+            }
+            return (key==-1)?rs:key;
         } catch (SQLException ex) {
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
