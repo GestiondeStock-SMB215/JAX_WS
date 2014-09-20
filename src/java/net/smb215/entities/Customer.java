@@ -24,7 +24,6 @@ public class Customer {
     private String cust_fax;
     private String cust_email;
     private String cust_site;
-    private String cust_logo;
     private String cust_time_stamp;
 
     public Customer() {
@@ -156,14 +155,6 @@ public class Customer {
 
     public void setCust_site(String cust_site) {
         this.cust_site = cust_site;
-    }
-
-    public String getCust_logo() {
-        return cust_logo;
-    }
-
-    public void setCust_logo(String cust_logo) {
-        this.cust_logo = cust_logo;
     }
 
     public String getCust_time_stamp() {

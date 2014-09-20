@@ -87,7 +87,7 @@ public class CRUD {
             if (fieldsStr.equals("")) {
                 fieldsStr = "*";
             } else {
-                fieldsStr = "( " + fieldsStr + " )";
+                fieldsStr = " " + fieldsStr + " ";
             }   
             if (whereClause.equals("")) {
                 whereClause = "1";
