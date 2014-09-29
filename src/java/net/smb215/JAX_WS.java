@@ -1952,4 +1952,38 @@ public class JAX_WS {
         String txt = "Source Bra: "+f.get("trans_src_bra_id")+" Dest: "+f.get("trans_dest_bra_id");
         return txt;
     }
+    
+    
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getCustIdByName")
+    public ArrayList<Customer> getCustIdByName(@WebParam(name = "cust_name") String cust_name) {
+        Customer cust  = new Customer();
+        ArrayList<Customer> custs = new ArrayList<Customer>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("cust_name", cust_name, Operand.LIKE));
+        ArrayList<String> fields = new ArrayList<String>();
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        try {
+           custs = cust.Read(qc, fields, order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(custs.isEmpty()){
+            cust.setCust_name("No result found");
+            cust.setCust_id("-1");
+            custs.add(cust);
+        }
+        return custs;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getNextId")
+    public String getNextId(@WebParam(name = "tableName") String tableName, @WebParam(name = "idName") String idName) {
+        return "6";
+    }
+    
 }
