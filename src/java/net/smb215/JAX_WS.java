@@ -1928,4 +1928,51 @@ public class JAX_WS {
             }
         return pages;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getNextId")
+    public String getNextId(@WebParam(name = "tableName") String tableName, @WebParam(name = "idName") String idName) {
+        return "6";
+//        DBHelper DBConn = new DBHelper();
+//        ResultSet result = null;
+//        String res = "";
+//        String QueryStr = "SELECT MAX(`"+idName+"`) AS `nextId` FROM `"+tableName+"`";
+//        System.out.println(QueryStr);
+//        result = DBConn.executeQuery(QueryStr);
+//        try {
+//            while (result.next()){
+//                System.out.println(result.getString(0));
+//                res = result.getString("nextId");
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return res;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getCustIdByName")
+    public ArrayList<Customer> getCustIdByName(@WebParam(name = "cust_name") String cust_name) {
+        Customer cust  = new Customer();
+        ArrayList<Customer> custs = new ArrayList<Customer>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("cust_name", cust_name, Operand.LIKE));
+        ArrayList<String> fields = new ArrayList<String>();
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        try {
+           custs = cust.Read(qc, fields, order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(custs.isEmpty()){
+            cust.setCust_name("No result found");
+            cust.setCust_id("-1");
+            custs.add(cust);
+        }
+        return custs;
+    }
 }
