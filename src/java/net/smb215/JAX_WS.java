@@ -1985,5 +1985,26 @@ public class JAX_WS {
     public String getNextId(@WebParam(name = "tableName") String tableName, @WebParam(name = "idName") String idName) {
         return "6";
     }
-    
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getOrderOutDetailByOrdOutId")
+    public ArrayList<OrderOutDetail> getOrderOutDetailByOrdOutId(@WebParam(name = "ord_out_det_ord_out_id") String ord_out_det_ord_out_id) {
+            OrderOutDetail ord_out_det  = new OrderOutDetail();
+            ArrayList<OrderOutDetail> ord_out_dets = new ArrayList<OrderOutDetail>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            qc.add(new QueryCriteria("ord_out_det_ord_out_id", ord_out_det_ord_out_id, Operand.EQUALS));
+            ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        try {
+           ord_out_dets = ord_out_det.Read(qc, fields, order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(ord_out_dets.isEmpty()){
+                return null;
+            }
+        return ord_out_dets;
+    }    
 }
