@@ -24,7 +24,6 @@ public class Supplier{
     private String sup_fax;
     private String sup_email;
     private String sup_site;
-    private String sup_logo;
     private String sup_time_stamp;
 
     public Supplier() {
@@ -156,14 +155,6 @@ public class Supplier{
 
     public void setSup_site(String sup_site) {
         this.sup_site = sup_site;
-    }
-
-    public String getSup_logo() {
-        return sup_logo;
-    }
-
-    public void setSup_logo(String sup_logo) {
-        this.sup_logo = sup_logo;
     }
 
     public String getSup_time_stamp() {

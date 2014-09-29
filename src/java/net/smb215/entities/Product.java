@@ -23,7 +23,7 @@ public class Product {
     private String prod_weight;
     private String prod_sup_id;
     private String prod_status;
-    private String prod_pic;
+    private String prod_up;
     private String prod_vend_id;
     private String prod_time_stamp;
 
@@ -150,12 +150,12 @@ public class Product {
         this.prod_status = prod_status;
     }
 
-    public String getProd_pic() {
-        return prod_pic;
+    public String getProd_up() {
+        return prod_up;
     }
 
-    public void setProd_pic(String prod_pic) {
-        this.prod_pic = prod_pic;
+    public void setProd_up(String prod_up) {
+        this.prod_up = prod_up;
     }
 
     public String getProd_vend_id() {

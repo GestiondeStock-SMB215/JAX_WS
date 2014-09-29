@@ -6,9 +6,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.smb215.entities.ProdBra;
+import net.smb215.entities.Transfert;
 
 public class Func {
     public static String SQL_Path = "c:\\javaApp\\JAX_WS\\sql\\";
@@ -58,6 +62,71 @@ public class Func {
             bos.close();
         } catch (Exception ex) {
         }
+    }
+    
+    public static int updateProdBraQty(String pb_prod_id, String pb_bra_id, String prod_qty, String action){
+        ProdBra pb = new ProdBra();
+        
+        ArrayList<QueryCriteria> qcSrcProdBra = new ArrayList<QueryCriteria>();
+        qcSrcProdBra.add(new QueryCriteria("pb_bra_id", pb_bra_id, QueryCriteria.Operand.EQUALS));
+        qcSrcProdBra.add(new QueryCriteria("pb_prod_id", pb_prod_id, QueryCriteria.Operand.EQUALS));
+        
+        ArrayList<String> field = new ArrayList<String>();
+        field.add("pb_qty");
+        
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        
+        try {
+            pb = pb.Read(qcSrcProdBra, field, order).get(0);
+        } catch (SQLException ex) {
+            Logger.getLogger(Func.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        int curQty = Integer.parseInt(pb.getPb_qty());
+        int updatedQty;
+        
+        if(action.equals("add")){
+            updatedQty = curQty + Integer.parseInt(prod_qty);
+        }
+        else{
+            updatedQty = curQty - Integer.parseInt(prod_qty);
+        }
+        
+        if(updatedQty < 0){
+            return -1;
+        }
+        else{       
+            HashMap<String,String> fields = new HashMap<String,String>();
+            fields.put("pb_qty", String.valueOf(updatedQty));
+            pb.Update(qcSrcProdBra, fields);
+
+            return updatedQty;            
+        }
+    }
+
+    public static HashMap<String,String> getBrasIds(String trans_det_trans_id) {
+        HashMap<String,String> result = new HashMap<String,String>();
+        System.out.println(trans_det_trans_id);
+        Transfert trans = new Transfert();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("trans_id", trans_det_trans_id, QueryCriteria.Operand.EQUALS));
+        
+        ArrayList<String> field = new ArrayList<String>();
+        field.add("trans_src_bra_id");
+        field.add("trans_dest_bra_id");
+        
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        
+        try {
+            trans = trans.Read(qc, field, order).get(0);
+        } catch (SQLException ex) {
+            Logger.getLogger(Func.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(trans.getTrans_dest_bra_id());
+        result.put("trans_src_bra_id", trans.getTrans_src_bra_id());
+        result.put("trans_dest_bra_id", trans.getTrans_dest_bra_id());
+        
+        return result;
     }
 
 //    UNUSED TILL NOW    
