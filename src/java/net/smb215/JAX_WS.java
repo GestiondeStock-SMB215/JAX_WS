@@ -1981,6 +1981,31 @@ public class JAX_WS {
     /**
      * Web service operation
      */
+    @WebMethod(operationName = "getSupIdByName")
+    public ArrayList<Supplier> getSupIdByName(@WebParam(name = "sup_name") String sup_name) {
+        Supplier sup  = new Supplier();
+        ArrayList<Supplier> sups = new ArrayList<Supplier>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("sup_name", sup_name, Operand.LIKE));
+        ArrayList<String> fields = new ArrayList<String>();
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        try {
+           sups = sup.Read(qc, fields, order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(sups.isEmpty()){
+            sup.setSup_name("No result found");
+            sup.setSup_id("-1");
+            sups.add(sup);
+        }
+        return sups;
+    }    
+    
+    
+    /**
+     * Web service operation
+     */
     @WebMethod(operationName = "getNextId")
     public String getNextId(@WebParam(name = "tableName") String tableName, @WebParam(name = "idName") String idName) {
         return "6";
@@ -2002,9 +2027,10 @@ public class JAX_WS {
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
-            if(ord_out_dets.isEmpty()){
-                return null;
-            }
+        if(ord_out_dets.isEmpty()){
+            ord_out_det.setOrd_out_det_id("-1");
+            ord_out_dets.add(ord_out_det);
+        }
         return ord_out_dets;
     }    
 }
