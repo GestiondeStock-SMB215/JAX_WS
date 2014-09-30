@@ -2033,4 +2033,27 @@ public class JAX_WS {
         }
         return ord_out_dets;
     }    
+
+ /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getOrderInDetailByOrdInId")
+    public ArrayList<OrderInDetail> getOrderInDetailByOrdInId(@WebParam(name = "ord_in_det_ord_in_id") String ord_in_det_ord_in_id) {
+            OrderInDetail ord_in_det  = new OrderInDetail();
+            ArrayList<OrderInDetail> ord_in_dets = new ArrayList<OrderInDetail>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            qc.add(new QueryCriteria("ord_in_det_ord_in_id", ord_in_det_ord_in_id, Operand.EQUALS));
+            ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        try {
+           ord_in_dets = ord_in_det.Read(qc, fields, order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(ord_in_dets.isEmpty()){
+            ord_in_det.setOrd_in_det_id("-1");
+            ord_in_dets.add(ord_in_det);
+        }
+        return ord_in_dets;
+    }    
 }
