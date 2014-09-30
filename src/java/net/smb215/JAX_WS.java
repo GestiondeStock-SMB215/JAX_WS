@@ -2055,5 +2055,5 @@ public class JAX_WS {
             ord_in_dets.add(ord_in_det);
         }
         return ord_in_dets;
-    }    
+    }  
 }
