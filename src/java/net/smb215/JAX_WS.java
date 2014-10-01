@@ -2056,4 +2056,30 @@ public class JAX_WS {
         }
         return ord_in_dets;
     }  
+      /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getTransDetailByTransId")
+    public ArrayList<TransDetail> getTransDetailByTransId(@WebParam(name = "trans_det_trans_id") String trans_det_trans_id) {
+            TransDetail trans_det  = new TransDetail();
+            ArrayList<TransDetail> trans_dets = new ArrayList<TransDetail>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            qc.add(new QueryCriteria("trans_det_trans_id", trans_det_trans_id, Operand.EQUALS));
+            ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<QueryOrder> transfert = new ArrayList<QueryOrder>();
+        try {
+           trans_dets = trans_det.Read(qc, fields, transfert);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(trans_dets.isEmpty()){
+            trans_det.setTrans_det_id("-1");
+            trans_dets.add(trans_det);
+        }
+        return trans_dets;
+    }  
 }
+
+    
+
+
