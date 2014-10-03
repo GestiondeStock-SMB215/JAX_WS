@@ -1055,55 +1055,7 @@ public class JAX_WS {
         return new User().Delete(qc);
         
     }
-    
-    
-    //TRANSFERT DETAIL//
-    
-    
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "aeTransDetail")
-    public Integer aeTransDetail(
-            @WebParam(name = "trans_det_id") String trans_det_id,  
-            @WebParam(name = "trans_det_trans_id") String trans_det_trans_id,
-            @WebParam(name = "trans_det_prod_id") String trans_det_prod_id,
-            @WebParam(name = "trans_det_qty") String trans_det_qty
-    ){
-        TransDetail trans_det = new TransDetail();
-        HashMap<String,String> fields = new HashMap<String,String>();
-        
-        if(trans_det_id.equals("-1")){
-            HashMap<String,String> brasIds = new HashMap<>();
-            brasIds = Func.getBrasIds(trans_det_trans_id);
-            
-            String trans_src_bra_id = brasIds.get("trans_src_bra_id");
-            String trans_dest_bra_id = brasIds.get("trans_dest_bra_id");
-            
-            int srcProdBraQty = Func.updateProdBraQty(trans_det_prod_id, trans_src_bra_id, trans_det_qty, "sub");
-            int destProdBraQty = Func.updateProdBraQty(trans_det_prod_id, trans_dest_bra_id, trans_det_qty, "add");
-            
-            fields.put("trans_det_trans_id", trans_det_trans_id);
-            fields.put("trans_det_prod_id",trans_det_prod_id);
-            fields.put("trans_det_qty", trans_det_qty);
-            fields.put("trans_det_time_stamp", Func.NOW());
-            return trans_det.Create(fields);
-        }
-        else{
-            // TransferDetail is denied
-            return null; 
-            
-//            fields.put("trans_det_trans_id", trans_det_trans_id);
-//            fields.put("trans_det_prod_id",trans_det_prod_id);
-//            fields.put("trans_det_qty", trans_det_qty);
-//            
-//            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
-//            qc.add(new QueryCriteria("trans_det_id", trans_det_id, Operand.EQUALS));
-//            return trans_det.Update(qc, fields);
-        }
-    }
-    
-    
+
     /**
      * Web service operation
      */
@@ -2078,8 +2030,59 @@ public class JAX_WS {
         }
         return trans_dets;
     }  
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "aeTransDetail")
+    public Integer aeTransDetail(
+            @WebParam(name = "trans_det_id") String trans_det_id, 
+            @WebParam(name = "trans_det_trans_id") String trans_det_trans_id, 
+            @WebParam(name = "trans_det_prod_id") String trans_det_prod_id, 
+            @WebParam(name = "trans_det_qty") String trans_det_qty) {       
+        
+        TransDetail trans_det = new TransDetail();
+        HashMap<String,String> fields = new HashMap<String,String>();
+        
+        if(trans_det_id.equals("-1")){
+            fields.put("trans_det_trans_id",trans_det_trans_id);
+            fields.put("trans_det_prod_id",trans_det_prod_id);
+            fields.put("trans_det_qty",trans_det_qty);
+            fields.put("trans_det_time_stamp",Func.NOW());
+                     
+            HashMap<String,String> brasIds = new HashMap<>();
+            brasIds = Func.getBrasIds(trans_det_trans_id);
+
+            String trans_src_bra_id = brasIds.get("trans_src_bra_id");
+            String trans_dest_bra_id = brasIds.get("trans_dest_bra_id");
+            
+            int srcProdBraQty = Func.updateProdBraQty(trans_det_prod_id, trans_src_bra_id, trans_det_qty, "sub");
+            int destProdBraQty = Func.updateProdBraQty(trans_det_prod_id, trans_dest_bra_id, trans_det_qty, "add");
+            return trans_det.Create(fields);
+        }
+        else{
+            return null;
+        }
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "checkProdQtyByBranch")
+    public String checkProdQtyByBranch(@WebParam(name = "prod_id") String prod_id, @WebParam(name = "trans_src_bra_id") String trans_src_bra_id) {
+        ProdBra prod_bra = new ProdBra();
+        ArrayList<ProdBra> prod_bras = new ArrayList<ProdBra>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("pb_prod_id", prod_id, Operand.EQUALS));
+        qc.add(new QueryCriteria("pb_bra_id", prod_id, Operand.EQUALS));
+        
+        ArrayList<String> fields = new ArrayList<String>();
+        ArrayList<QueryOrder> ord = new ArrayList<QueryOrder>();
+        try {
+            prod_bras = prod_bra.Read(qc, fields, ord);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return prod_bras.get(0).getPb_qty();
+    }
 }
-
-    
-
-
