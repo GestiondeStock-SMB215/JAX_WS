@@ -2069,12 +2069,14 @@ public class JAX_WS {
      * Web service operation
      */
     @WebMethod(operationName = "checkProdQtyByBranch")
-    public String checkProdQtyByBranch(@WebParam(name = "prod_id") String prod_id, @WebParam(name = "trans_src_bra_id") String trans_src_bra_id) {
+    public String checkProdQtyByBranch(
+            @WebParam(name = "prod_id") String prod_id, 
+            @WebParam(name = "trans_src_bra_id") String trans_src_bra_id) {
         ProdBra prod_bra = new ProdBra();
         ArrayList<ProdBra> prod_bras = new ArrayList<ProdBra>();
         ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
         qc.add(new QueryCriteria("pb_prod_id", prod_id, Operand.EQUALS));
-        qc.add(new QueryCriteria("pb_bra_id", prod_id, Operand.EQUALS));
+        qc.add(new QueryCriteria("pb_bra_id", trans_src_bra_id, Operand.EQUALS));
         
         ArrayList<String> fields = new ArrayList<String>();
         ArrayList<QueryOrder> ord = new ArrayList<QueryOrder>();
@@ -2083,6 +2085,11 @@ public class JAX_WS {
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return prod_bras.get(0).getPb_qty();
+        if(prod_bras.size() == 0){
+            return "Out of Stock";
+        }
+        else{
+            return prod_bras.get(0).getPb_qty();
+        }
     }
 }
