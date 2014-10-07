@@ -2111,4 +2111,17 @@ public class JAX_WS {
         return new OrderOut().Delete(qc);
     }
     
+    /**
+    * Web service operation
+    */
+    @WebMethod(operationName = "deleteTransfertCascade")
+    public Integer deleteTransfertCascade(@WebParam(name = "trans_id") String trans_id) {
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("trans_det_trans_id", trans_id, Operand.EQUALS));
+        new TransDetail().Delete(qc);
+        qc.clear();
+        qc.add(new QueryCriteria("trans_id", trans_id, Operand.EQUALS));
+        return new Transfert().Delete(qc);
+    }
+    
 }
