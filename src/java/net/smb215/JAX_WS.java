@@ -2085,4 +2085,30 @@ public class JAX_WS {
         }
         return prod_bras.get(0).getPb_qty();
     }
+ 
+    /**
+    * Web service operation
+    */
+    @WebMethod(operationName = "deleteOrderInCascade")
+    public Integer deleteOrderInCascade(@WebParam(name = "ord_in_id") String ord_in_id) {
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("ord_in_det_ord_in_id", ord_in_id, Operand.EQUALS));
+        new OrderInDetail().Delete(qc);
+        qc.clear();
+        qc.add(new QueryCriteria("ord_in_id", ord_in_id, Operand.EQUALS));
+        return new OrderIn().Delete(qc);
+    }
+    /**
+    * Web service operation
+    */
+    @WebMethod(operationName = "deleteOrderOutCascade")
+    public Integer deleteOrderOutCascade(@WebParam(name = "ord_out_id") String ord_out_id) {
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("ord_out_det_ord_out_id", ord_out_id, Operand.EQUALS));
+        new OrderOutDetail().Delete(qc);
+        qc.clear();
+        qc.add(new QueryCriteria("ord_out_id", ord_out_id, Operand.EQUALS));
+        return new OrderOut().Delete(qc);
+    }
+    
 }
