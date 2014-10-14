@@ -2126,5 +2126,27 @@ public class JAX_WS {
         qc.add(new QueryCriteria("trans_id", trans_id, Operand.EQUALS));
         return new Transfert().Delete(qc);
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getIncompOrderIn")
+    public ArrayList<OrderIn> getIncompOrderIn() {
+        OrderIn ord_in  = new OrderIn();
+        ArrayList<OrderIn> ord_ins = new ArrayList<OrderIn>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("ord_in_status", "1", Operand.EQUALS));
+        ArrayList<String> fields = new ArrayList<String>();
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        try {
+           ord_ins = ord_in.Read(qc, fields, order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(ord_ins.isEmpty()){
+                return null;
+            }
+        return ord_ins;
+    }
     
 }
