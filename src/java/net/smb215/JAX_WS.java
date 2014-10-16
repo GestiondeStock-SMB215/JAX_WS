@@ -2173,9 +2173,10 @@ public class JAX_WS {
         } catch (SQLException ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
-            if(inv_ins.isEmpty()){
-                return null;
-            }
+        if(inv_ins.isEmpty()){
+            inv_in.setInv_in_id("-1");
+            inv_ins.add(inv_in);
+        }
         return inv_ins;        
     }    
 }
