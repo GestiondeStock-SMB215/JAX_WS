@@ -2155,5 +2155,27 @@ public class JAX_WS {
             }
         return ord_ins;
     }
-    
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getInvInByOrdIn")
+    public ArrayList<InvoiceIn> getInvInByOrdIn(@WebParam(name = "ord_in_id") String ord_in_id) {
+        InvoiceIn inv_in  = new InvoiceIn();
+        ArrayList<InvoiceIn> inv_ins = new ArrayList<InvoiceIn>();
+        
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("inv_in_ord_in_id", ord_in_id, Operand.EQUALS));
+        
+        ArrayList<String> fields = new ArrayList<String>();
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        try {
+           inv_ins = inv_in.Read(qc, fields, order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(inv_ins.isEmpty()){
+                return null;
+            }
+        return inv_ins;        
+    }    
 }
