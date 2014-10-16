@@ -983,6 +983,7 @@ public class JAX_WS {
     public Integer aeUser(
             @WebParam(name = "user_id") String user_id, 
             @WebParam(name = "user_role_id") String user_role_id, 
+            @WebParam(name = "user_bra_id") String user_bra_id, 
             @WebParam(name = "user_name") String user_name, 
             @WebParam(name = "user_username") String user_username, 
             @WebParam(name = "user_password") String user_password, 
@@ -994,6 +995,7 @@ public class JAX_WS {
         
         if(user_id.equals("-1")){
             fields.put("user_role_id", user_role_id);
+            fields.put("user_bra_id", user_bra_id);
             fields.put("user_name",user_name);
             fields.put("user_username", user_username);
             fields.put("user_password", user_password);
@@ -1005,6 +1007,7 @@ public class JAX_WS {
         }
         else{
             fields.put("user_role_id", user_role_id);
+            fields.put("user_bra_id",user_bra_id);
             fields.put("user_name",user_name);
             fields.put("user_username", user_username);
             if(!user_password.equals("6bb61e3b7bce0931da574d19d1d82c88")){
@@ -2129,6 +2132,28 @@ public class JAX_WS {
         qc.clear();
         qc.add(new QueryCriteria("trans_id", trans_id, Operand.EQUALS));
         return new Transfert().Delete(qc);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getIncompOrderIn")
+    public ArrayList<OrderIn> getIncompOrderIn() {
+        OrderIn ord_in  = new OrderIn();
+        ArrayList<OrderIn> ord_ins = new ArrayList<OrderIn>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("ord_in_status", "1", Operand.EQUALS));
+        ArrayList<String> fields = new ArrayList<String>();
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        try {
+           ord_ins = ord_in.Read(qc, fields, order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(ord_ins.isEmpty()){
+                return null;
+            }
+        return ord_ins;
     }
     
 }

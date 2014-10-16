@@ -13,6 +13,7 @@ public class User {
     private final CRUD crud;
     private String user_id;
     private String user_role_id;
+    private String user_bra_id;
     private String user_name;
     private String user_username;
     private String user_password;
@@ -46,6 +47,14 @@ public class User {
    
     public int Update(ArrayList<QueryCriteria> criteria, HashMap<String, String> fields) {
         return crud.Update(criteria, fields);
+    }
+
+    public String getUser_bra_id() {
+        return user_bra_id;
+    }
+
+    public void setUser_bra_id(String user_bra_id) {
+        this.user_bra_id = user_bra_id;
     }
 
     public String getUser_id() {
