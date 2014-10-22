@@ -2179,4 +2179,71 @@ public class JAX_WS {
         }
         return inv_ins;        
     }    
+   
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "ReadProdBra")
+    public ArrayList<ProdBra> ReadProdBra(@WebParam(name = "pb_bra_id") String pb_bra_id) {
+            ProdBra pb_in  = new ProdBra();
+            ArrayList<ProdBra> pb_ins = new ArrayList<ProdBra>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            if(!pb_bra_id.equals("-1")){
+                qc.add(new QueryCriteria("pb_bra_id", pb_bra_id, Operand.EQUALS));
+            }
+            ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        try {
+           pb_ins = pb_in.Read(qc, fields, order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(pb_ins.isEmpty()){
+                return null;
+            }
+        return pb_ins;
+    }
+    
+        /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "FindProdInBra")
+    public ArrayList<ProdBra> FindProdInBra(@WebParam(name = "pb_prod_id") String pb_prod_id) {
+            ProdBra pb_in  = new ProdBra();
+            ArrayList<ProdBra> pb_ins = new ArrayList<ProdBra>();
+            ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            if(!pb_prod_id.equals("-1")){
+                qc.add(new QueryCriteria("pb_prod_id", pb_prod_id, Operand.EQUALS));
+            }
+            ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        try {
+           pb_ins = pb_in.Read(qc, fields, order);
+        } catch (SQLException ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(pb_ins.isEmpty()){
+                return null;
+            }
+        return pb_ins;
+    }
+    
+    @WebMethod(operationName = "getProdIdBySku")
+    public String getProdIdBySku(@WebParam(name = "prod_sku") String prod_sku){
+        Product prod = new Product();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+            if(!prod_sku.equals("-1")){
+                qc.add(new QueryCriteria("prod_sku", prod_sku, Operand.EQUALS));
+            }
+        ArrayList<String> fields = new ArrayList<String>();
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+        String rtn = "Product Not Found"; 
+        try {
+            rtn = prod.Read(qc, fields, order).get(0).getProd_id();
+        } catch (Exception ex) {
+            Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rtn;
+    }
+    
 }
