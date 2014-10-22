@@ -2184,24 +2184,31 @@ public class JAX_WS {
      * Web service operation
      */
     @WebMethod(operationName = "ReadProdBra")
-    public ArrayList<ProdBra> ReadProdBra(@WebParam(name = "pb_bra_id") String pb_bra_id) {
+    public ArrayList<Product> ReadProdBra(@WebParam(name = "pb_bra_id") String pb_bra_id) {
             ProdBra pb_in  = new ProdBra();
             ArrayList<ProdBra> pb_ins = new ArrayList<ProdBra>();
+            ArrayList<Product> product = new ArrayList<Product>();
             ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
             if(!pb_bra_id.equals("-1")){
                 qc.add(new QueryCriteria("pb_bra_id", pb_bra_id, Operand.EQUALS));
             }
             ArrayList<String> fields = new ArrayList<String>();
             ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+            Product prod = new Product();
         try {
            pb_ins = pb_in.Read(qc, fields, order);
-        } catch (SQLException ex) {
+           for(int i=0;i<pb_ins.size();i++){
+           qc.clear();
+           qc.add(new QueryCriteria("prod_id", pb_ins.get(i).getPb_prod_id(), Operand.EQUALS));
+           product.add(prod.Read(qc, fields, order).get(0));
+           }
+        } catch (Exception ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
-            if(pb_ins.isEmpty()){
+            if(product.isEmpty()){
                 return null;
             }
-        return pb_ins;
+        return product;
     }
     
         /**
