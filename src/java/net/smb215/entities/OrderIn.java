@@ -13,6 +13,7 @@ public class OrderIn {
     private final CRUD crud;
     private String ord_in_id;
     private String ord_in_cust_id;
+    private String ord_in_bra_id;
     private String ord_in_date;
     private String ord_in_del_date;
     private String ord_in_status;
@@ -43,6 +44,14 @@ public class OrderIn {
             result.add(tmp);
         }
         return result;
+    }
+
+    public String getOrd_in_bra_id() {
+        return ord_in_bra_id;
+    }
+
+    public void setOrd_in_bra_id(String ord_in_bra_id) {
+        this.ord_in_bra_id = ord_in_bra_id;
     }
 
     public String getOrd_in_id() {

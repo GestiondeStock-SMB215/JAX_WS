@@ -1321,6 +1321,7 @@ public class JAX_WS {
     @WebMethod(operationName = "aeOrderIn")
     public Integer aeOrderIn(
             @WebParam(name = "ord_in_id") String ord_in_id,  
+            @WebParam(name = "ord_in_bra_id") String ord_in_bra_id,
             @WebParam(name = "ord_in_cust_id") String ord_in_cust_id,
             @WebParam(name = "ord_in_date") String ord_in_date,
             @WebParam(name = "ord_in_del_date") String ord_in_del_date,
@@ -1330,6 +1331,7 @@ public class JAX_WS {
         HashMap<String,String> fields = new HashMap<String,String>();
         
         if(ord_in_id.equals("-1")){
+            fields.put("ord_in_bra_id", ord_in_bra_id);
             fields.put("ord_in_cust_id", ord_in_cust_id);
             fields.put("ord_in_date",ord_in_date);
             fields.put("ord_in_del_date", ord_in_del_date);
@@ -1338,6 +1340,7 @@ public class JAX_WS {
             return ord_in.Create(fields);
         }
         else{
+            fields.put("ord_in_bra_id", ord_in_bra_id);
             fields.put("ord_in_cust_id", ord_in_cust_id);
             fields.put("ord_in_date",ord_in_date);
             fields.put("ord_in_del_date", ord_in_del_date);
@@ -2253,4 +2256,27 @@ public class JAX_WS {
         return rtn;
     }
     
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getInvoiceInDetail")
+    public ArrayList<InvoiceInDetail> getInvoiceInDetail(@WebParam(name = "inv_in_id") String inv_in_id) {
+        InvoiceInDetail inv_in_det  = new InvoiceInDetail();
+        ArrayList<InvoiceInDetail> inv_in_dets = new ArrayList<InvoiceInDetail>();
+        ArrayList<QueryCriteria> qc = new ArrayList<QueryCriteria>();
+        qc.add(new QueryCriteria("inv_in_det_inv_id", inv_in_id, Operand.EQUALS));
+        ArrayList<String> fields = new ArrayList<String>();
+        ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
+    try {
+       inv_in_dets = inv_in_det.Read(qc, fields, order);
+    } catch (SQLException ex) {
+        Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        if(inv_in_dets.isEmpty()){
+            inv_in_det.setInv_in_det_id("-1");
+            inv_in_dets.add(inv_in_det);
+        }
+    return inv_in_dets;
+    }
 }
