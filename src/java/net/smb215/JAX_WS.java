@@ -2187,7 +2187,7 @@ public class JAX_WS {
      * Web service operation
      */
     @WebMethod(operationName = "ReadProdBra")
-    public ArrayList<Product> ReadProdBra(@WebParam(name = "pb_bra_id") String pb_bra_id) {
+    public ArrayList<ProdBra> ReadProdBra(@WebParam(name = "pb_bra_id") String pb_bra_id) {
             ProdBra pb_in  = new ProdBra();
             ArrayList<ProdBra> pb_ins = new ArrayList<ProdBra>();
             ArrayList<Product> product = new ArrayList<Product>();
@@ -2197,21 +2197,22 @@ public class JAX_WS {
             }
             ArrayList<String> fields = new ArrayList<String>();
             ArrayList<QueryOrder> order = new ArrayList<QueryOrder>();
-            Product prod = new Product();
+            //Product prod = new Product();
         try {
            pb_ins = pb_in.Read(qc, fields, order);
-           for(int i=0;i<pb_ins.size();i++){
-           qc.clear();
-           qc.add(new QueryCriteria("prod_id", pb_ins.get(i).getPb_prod_id(), Operand.EQUALS));
-           product.add(prod.Read(qc, fields, order).get(0));
-           }
+//           for(int i=0;i<pb_ins.size();i++){
+//           qc.clear();
+//           qc.add(new QueryCriteria("prod_id", pb_ins.get(i).getPb_prod_id(), Operand.EQUALS));
+//           product.add(prod.Read(qc, fields, order).get(0));
+//           }
         } catch (Exception ex) {
             Logger.getLogger(JAX_WS.class.getName()).log(Level.SEVERE, null, ex);
         }
-            if(product.isEmpty()){
-                return null;
+            if(pb_ins.isEmpty()){
+                pb_in.setPb_id("=1");
+                pb_ins.add(pb_in);
             }
-        return product;
+        return pb_ins;
     }
     
         /**
